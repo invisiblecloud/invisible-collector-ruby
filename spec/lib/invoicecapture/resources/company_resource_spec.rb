@@ -12,10 +12,19 @@ describe InvoiceCapture::CompanyResource do
       fixture = api_fixture('company/get')
       parsed  = JSON.load(fixture)
 
-      stub_do_api('').to_return(body: fixture)
+      stub_do_api('/companies').to_return(body: fixture)
       company = resource.get
 
-      expect(company.name).to eq("Johny's Company")
+      expect(company).to be_kind_of(InvoiceCapture::Company)
+
+      expect(company.name).to eq(parsed['name'])
+      expect(company.vat_number).to eq(parsed['vatNumber'])
+      expect(company.address).to eq(parsed['address'])
+      expect(company.zip_code).to eq(parsed['zipCode'])
+      expect(company.city).to eq(parsed['city'])
+      expect(company.country).to eq(parsed['country'])
+      expect(company.gid).to eq(parsed['gid'])
+      expect(company.notifications_enabled).to eq(parsed['notificationsEnabled'])
     end
 
   end
@@ -23,7 +32,24 @@ describe InvoiceCapture::CompanyResource do
   describe '#update' do
 
     it 'updates the company info' do
-      company_info = resource.update
+      fixture = api_fixture('company/update')
+      parsed  = JSON.load(fixture)
+
+      company = InvoiceCapture::Company.new
+      as_json = {}
+      stub_do_api('/companies', :put).with(body: as_json).to_return(body: fixture, status: 201)
+      company = resource.update company
+
+      expect(company).to be_kind_of(InvoiceCapture::Company)
+
+      expect(company.name).to eq(parsed['name'])
+      expect(company.vat_number).to eq(parsed['vatNumber'])
+      expect(company.address).to eq(parsed['address'])
+      expect(company.zip_code).to eq(parsed['zipCode'])
+      expect(company.city).to eq(parsed['city'])
+      expect(company.country).to eq(parsed['country'])
+      expect(company.gid).to eq(parsed['gid'])
+      expect(company.notifications_enabled).to eq(parsed['notificationsEnabled'])
     end
 
   end
@@ -31,7 +57,22 @@ describe InvoiceCapture::CompanyResource do
   describe '#enable_notifications' do
 
     it 'enables notifications' do
-      company_info = resource.enable_notifications
+      fixture = api_fixture('company/enableNotifications')
+      parsed  = JSON.load(fixture)
+
+      stub_do_api('/companies/enableNotifications', :put).to_return(body: fixture)
+      company = resource.enable_notifications
+
+      expect(company).to be_kind_of(InvoiceCapture::Company)
+
+      expect(company.name).to eq(parsed['name'])
+      expect(company.vat_number).to eq(parsed['vatNumber'])
+      expect(company.address).to eq(parsed['address'])
+      expect(company.zip_code).to eq(parsed['zipCode'])
+      expect(company.city).to eq(parsed['city'])
+      expect(company.country).to eq(parsed['country'])
+      expect(company.gid).to eq(parsed['gid'])
+      expect(company.notifications_enabled).to eq(true)
     end
 
   end
@@ -39,7 +80,22 @@ describe InvoiceCapture::CompanyResource do
   describe '#disable_notifications' do
 
     it 'disables notifications' do
-      company_info = resource.disable_notifications
+      fixture = api_fixture('company/disableNotifications')
+      parsed  = JSON.load(fixture)
+
+      stub_do_api('/companies/disableNotifications', :put).to_return(body: fixture)
+      company = resource.disable_notifications
+
+      expect(company).to be_kind_of(InvoiceCapture::Company)
+
+      expect(company.name).to eq(parsed['name'])
+      expect(company.vat_number).to eq(parsed['vatNumber'])
+      expect(company.address).to eq(parsed['address'])
+      expect(company.zip_code).to eq(parsed['zipCode'])
+      expect(company.city).to eq(parsed['city'])
+      expect(company.country).to eq(parsed['country'])
+      expect(company.gid).to eq(parsed['gid'])
+      expect(company.notifications_enabled).to eq(false)
     end
 
   end

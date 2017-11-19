@@ -1,0 +1,10 @@
+{
+  "name": "Johny's Company",
+  "vatNumber": "PT543219876",
+  "address": "Invisible Avenue, 456",
+  "zipCode": "1234-543",
+  "city": "Lisbon",
+  "country": "PT",
+  "gid": "061d2feb-81c2-4694-a74a-13cecbe7d2ce",
+  "notificationsEnabled": false
+}
