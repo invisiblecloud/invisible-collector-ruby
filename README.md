@@ -1,6 +1,7 @@
 # Invoice Capture API Ruby client
 
 [![Travis Badge](https://travis-ci.org/invisiblecloud/invoice-capture-ruby.svg?branch=master)](https://travis-ci.org/invisiblecloud/invoice-capture-ruby)
+[![Code Climate](https://codeclimate.com/github/invisiblecloud/invoice-capture-ruby.svg)](https://codeclimate.com/github/invisiblecloud/invoice-capture-ruby)
 
 ## Installation
 
