@@ -6,12 +6,10 @@ module InvoiceCapture
 
     INVOICECAPTURE_API = 'https://api.invcapture.com'
 
-    attr_accessor :client
     attr_reader :api_token
 
     def initialize(option = {})
       @api_token = option[:api_token]
-      @client = nil
     end
 
     def connection

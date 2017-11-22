@@ -1,10 +1,6 @@
-# Invoice::Capture::Ruby
+# Invoice Capture API Ruby client
 
 [![Travis Badge](https://travis-ci.org/invisiblecloud/invoice-capture-ruby.svg?branch=master)](https://travis-ci.org/invisiblecloud/invoice-capture-ruby)
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/invoice/capture/ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -24,7 +20,37 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You'll need to retrieve an access token from Invoice Capture's dashboard.
+
+With your access token you can instantiate a new client with it:
+
+```ruby
+client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
+```
+
+## Resources
+
+### Company resource
+
+```ruby
+client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
+client.company #=> InvoiceCapture::CompanyResource
+```
+
+Actions supported:
+
+* `client.company.get()`
+
+### Customer resource
+
+```ruby
+client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
+client.customer #=> InvoiceCapture::CustomerResource
+```
+
+Actions supported:
+
+* `client.customer.get(:id)`
 
 ## Development
 
@@ -34,8 +60,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/invoice-capture-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/invisiblecloud/invoice-capture-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+1. Fork it ( https://github.com/invisiblecloud/invoice-capture-ruby/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
 
 ## License
 
