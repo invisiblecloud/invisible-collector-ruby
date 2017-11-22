@@ -27,6 +27,8 @@ describe InvoiceCapture::CustomerResource do
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.address).to eq(parsed['address'])
+      expect(customer.city).to eq(parsed['city'])
+      expect(customer.country).to eq(parsed['country'])
       expect(customer.gid).to eq(parsed['gid'])
     end
 
@@ -53,6 +55,8 @@ describe InvoiceCapture::CustomerResource do
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.address).to eq(parsed['address'])
+      expect(customer.city).to eq(parsed['city'])
+      expect(customer.country).to eq(parsed['country'])
       expect(customer.gid).to eq(parsed['gid'])
     end
 
