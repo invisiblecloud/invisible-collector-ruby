@@ -9,7 +9,7 @@ module InvoiceCapture
     attr_reader :api_token
 
     def initialize(option = {})
-      @api_token = option[:api_token]
+      @api_token = option.with_indifferent_access[:api_token]
     end
 
     def connection
@@ -39,6 +39,7 @@ module InvoiceCapture
         url: INVOICECAPTURE_API,
         headers: {
           content_type: 'application/json',
+          'User-Agent' => "InvoiceCapture Ruby v#{InvoiceCapture::VERSION}",
           'X-Api-Token' => api_token
         }
       }

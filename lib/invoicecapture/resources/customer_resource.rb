@@ -40,7 +40,7 @@ module InvoiceCapture
         req.headers['Content-Type'] = 'application/json'
         req.body = customer.to_json
       end
-      if response.status == 422 || response.status == 400
+      if response.status == 422 || response.status == 400 || response.status == 409
         message = JSON.parse(response.body)
         code = message['code']
         message = message['message']

@@ -109,6 +109,14 @@ describe InvoiceCapture::CustomerResource do
 
   describe '#save' do
 
+    it 'fails on conflict' do
+      fixture = api_fixture('customer/conflict')
+      stub_do_api("/customers").with(body: '{}').to_return(body: fixture, status: 409)
+      expect {
+        resource.save
+      }.to raise_exception(InvoiceCapture::InvalidRequest).with_message('409: Customer already registered')
+    end
+
     it 'returns the created customer using a hash' do
       fixture = api_fixture('customer/post')
       parsed  = JSON.load(fixture)
