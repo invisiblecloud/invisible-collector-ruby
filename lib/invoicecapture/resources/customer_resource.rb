@@ -7,6 +7,11 @@ module InvoiceCapture
       @connection = options[:connection]
     end
 
+    def find(params={})
+      response = @connection.get("customers/find?#{URI.encode_www_form(params)}")
+      JSON.parse(response.body).map { |json| Customer.new(json) }
+    end
+
     def get(id)
       response = @connection.get("customers/#{id}")
       if response.status == 404
