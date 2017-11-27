@@ -11,6 +11,7 @@ module InvoiceCapture
     attr_accessor :notifications_enabled
 
     def initialize(options={})
+      options = options.with_indifferent_access
       @name = options['name']
       @vat_number = options['vatNumber']
       @address = options['address']

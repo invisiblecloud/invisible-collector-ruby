@@ -36,6 +36,7 @@ describe InvoiceCapture::CustomerResource do
         expect(customer).to be_kind_of(InvoiceCapture::Customer)
 
         expect(customer.name).to eq(parsed['name'])
+        expect(customer.vat_number).to eq(parsed['vatNumber'])
         expect(customer.address).to eq(parsed['address'])
         expect(customer.phone).to eq(parsed['phone'])
         expect(customer.city).to eq(parsed['city'])
@@ -66,6 +67,7 @@ describe InvoiceCapture::CustomerResource do
       expect(customer).to be_kind_of(InvoiceCapture::Customer)
 
       expect(customer.name).to eq(parsed['name'])
+      expect(customer.vat_number).to eq(parsed['vatNumber'])
       expect(customer.address).to eq(parsed['address'])
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.city).to eq(parsed['city'])
@@ -95,6 +97,48 @@ describe InvoiceCapture::CustomerResource do
       expect(customer).to be_kind_of(InvoiceCapture::Customer)
 
       expect(customer.name).to eq(parsed['name'])
+      expect(customer.vat_number).to eq(parsed['vatNumber'])
+      expect(customer.address).to eq(parsed['address'])
+      expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.city).to eq(parsed['city'])
+      expect(customer.country).to eq(parsed['country'])
+      expect(customer.gid).to eq(parsed['gid'])
+    end
+
+  end
+
+  describe '#save' do
+
+    it 'returns the created customer using a hash' do
+      fixture = api_fixture('customer/post')
+      parsed  = JSON.load(fixture)
+
+      stub_do_api("/customers", :post).with(body: '{}').to_return(body: fixture)
+      customer = resource.save
+
+      expect(customer).to be_kind_of(InvoiceCapture::Customer)
+
+      expect(customer.name).to eq(parsed['name'])
+      expect(customer.vat_number).to eq(parsed['vatNumber'])
+      expect(customer.address).to eq(parsed['address'])
+      expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.city).to eq(parsed['city'])
+      expect(customer.country).to eq(parsed['country'])
+      expect(customer.gid).to eq(parsed['gid'])
+    end
+
+    it 'returns the created customer using customer object' do
+      fixture = api_fixture('customer/post')
+      parsed  = JSON.load(fixture)
+      new_customer = InvoiceCapture::Customer.new parsed
+
+      stub_do_api("/customers", :post).with(body: new_customer.to_json).to_return(body: fixture)
+      customer = resource.save(new_customer)
+
+      expect(customer).to be_kind_of(InvoiceCapture::Customer)
+
+      expect(customer.name).to eq(parsed['name'])
+      expect(customer.vat_number).to eq(parsed['vatNumber'])
       expect(customer.address).to eq(parsed['address'])
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.city).to eq(parsed['city'])
