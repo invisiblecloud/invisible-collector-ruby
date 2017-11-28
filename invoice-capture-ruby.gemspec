@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'invoicecapture/version'
+require 'invoice_capture/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "invoice-capture-ruby"
+  spec.name          = "invoice_capture"
   spec.version       = InvoiceCapture::VERSION
   spec.authors       = ["João Madureira"]
   spec.email         = ["info@invcapture.com"]

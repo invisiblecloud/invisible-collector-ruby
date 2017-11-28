@@ -1,5 +1,3 @@
-require 'json'
-
 module InvoiceCapture
   class CompanyResource
 

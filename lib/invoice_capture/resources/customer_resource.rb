@@ -1,5 +1,3 @@
-require 'json'
-
 module InvoiceCapture
   class CustomerResource
 
@@ -50,6 +48,5 @@ module InvoiceCapture
         Customer.new(JSON.parse(response.body))
       end
     end
-
   end
 end
