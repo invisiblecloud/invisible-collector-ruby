@@ -15,13 +15,13 @@ module InvoiceCapture
     def initialize(options={})
       options = options.with_indifferent_access
       @name = options['name']
-      @vat_number = options['vatNumber']
+      @vat_number = options['vat_number']
       @address = options['address']
-      @zip_code = options['zipCode']
+      @zip_code = options['zip_code']
       @city = options['city']
       @country = options['country']
       @gid = options['gid']
-      @notifications_enabled = options['notificationsEnabled']
+      @notifications_enabled = options['notifications_enabled']
     end
 
   end

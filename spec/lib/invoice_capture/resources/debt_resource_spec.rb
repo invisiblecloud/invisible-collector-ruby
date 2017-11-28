@@ -32,7 +32,7 @@ describe InvoiceCapture::DebtResource do
       fixture = api_fixture('debt/cancel')
       parsed  = JSON.load(fixture)
 
-      debt = InvoiceCapture::Debt.new externalId: 'id'
+      debt = InvoiceCapture::Debt.new external_id: 'id'
 
       stub_do_api('/invoices/id/cancel', :put).to_return(body: fixture)
       debt = resource.cancel(debt)

@@ -19,16 +19,16 @@ module InvoiceCapture
     def initialize(options={})
       options = options.with_indifferent_access
       @number = options[:number]
-      @external_id = options[:externalId]
+      @external_id = options[:external_id]
       @type = options[:type]
       @status = options[:status]
       @date = options[:date]
-      @due_date = options[:dueDate]
+      @due_date = options[:due_date]
       @customer = options[:customer]
       @items = options[:items]
-      @net_total = options[:netTotal]
+      @net_total = options[:net_total]
       @tax = options[:tax]
-      @gross_total = options[:grossTotal]
+      @gross_total = options[:gross_total]
       @currency = options[:currency]
     end
   end

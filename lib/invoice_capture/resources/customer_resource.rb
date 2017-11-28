@@ -7,7 +7,7 @@ module InvoiceCapture
 
     def find(params={})
       response = @connection.get("customers/find?#{URI.encode_www_form(params)}")
-      JSON.parse(response.body).map { |json| Customer.new(json) }
+      JSON.parse(response.body).map { |json| Customer.new(json.deep_transform_keys(&:underscore)) }
     end
 
     def get(id)
@@ -15,7 +15,7 @@ module InvoiceCapture
       if response.status == 404
         nil
       else
-        Customer.new(JSON.parse(response.body))
+        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
 
@@ -28,7 +28,7 @@ module InvoiceCapture
         error = InvoiceCapture::NotFound.new "#{code}: #{message}"
         raise error
       else
-        Customer.new(JSON.parse(response.body))
+        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
 
@@ -45,7 +45,7 @@ module InvoiceCapture
         error = InvoiceCapture::InvalidRequest.new "#{code}: #{message}"
         raise error
       else
-        Customer.new(JSON.parse(response.body))
+        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
   end

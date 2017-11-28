@@ -15,11 +15,11 @@ module InvoiceCapture
     def initialize(options={})
       options = options.with_indifferent_access
       @name = options[:name]
-      @vat_number = options[:vatNumber]
+      @vat_number = options[:vat_number]
       @gid = options[:gid]
       @phone = options[:phone]
       @address = options[:address]
-      @zip_code = options[:zipCode]
+      @zip_code = options[:zip_code]
       @city = options[:city]
       @country = options[:country]
     end

@@ -15,7 +15,7 @@ module InvoiceCapture
         error = InvoiceCapture::NotFound.new "#{code}: #{message}"
         raise error
       else
-        Debt.new(JSON.parse(response.body))
+        Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
 
@@ -24,7 +24,7 @@ module InvoiceCapture
       if response.status == 404
         nil
       else
-        Debt.new(JSON.parse(response.body))
+        Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
   end
