@@ -6,7 +6,7 @@ module InvoiceCapture
     end
 
     def cancel(debt = {})
-      id = debt.kind_of?(InvoiceCapture::Debt) ? debt.external_id : debt[:external_id]
+      id = debt.kind_of?(InvoiceCapture::Debt) ? debt.external_id : debt
       response = @connection.put("invoices/#{id}/cancel")
       if response.status == 404
         message = JSON.parse(response.body)
