@@ -1,0 +1,18 @@
+[{
+  "number": "FT TEST/001",
+  "externalId": "31424523",
+  "type": "FT",
+  "status": "PENDING",
+  "date": "2016-10-08",
+  "dueDate": "2016-11-08",
+  "netTotal": 120.0,
+  "tax": 30.0,
+  "grossTotal": 150.0,
+  "items": [{
+    "name": "small item",
+    "description": "a rather small item",
+    "quantity": 1.0,
+    "vat": 30.0,
+    "price": 150.0
+  }]
+}]

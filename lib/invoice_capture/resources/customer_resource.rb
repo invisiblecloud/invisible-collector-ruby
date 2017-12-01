@@ -6,7 +6,7 @@ module InvoiceCapture
     end
 
     def find(params={})
-      response = @connection.get("customers/find?#{URI.encode_www_form(params)}")
+      response = @connection.get('customers/find', params)
       JSON.parse(response.body).map { |json| Customer.new(json.deep_transform_keys(&:underscore)) }
     end
 
