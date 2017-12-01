@@ -28,6 +28,11 @@ module InvoiceCapture
       resources[:customer]
     end
 
+    def debt
+      resources[:debt] ||= DebtResource.new(connection: connection)
+      resources[:debt]
+    end
+
     def resources
       @resources ||= {}
     end
