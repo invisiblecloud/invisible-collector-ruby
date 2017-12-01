@@ -9,11 +9,7 @@ module InvoiceCapture
       id = debt.kind_of?(InvoiceCapture::Debt) ? debt.external_id : debt
       response = @connection.put("debts/#{id}/cancel")
       if response.status == 404
-        message = JSON.parse(response.body)
-        code = message['code']
-        message = message['message']
-        error = InvoiceCapture::NotFound.new "#{code}: #{message}"
-        raise error
+        raise InvoiceCapture::NotFound.from_json(response.body)
       else
         Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
@@ -40,11 +36,7 @@ module InvoiceCapture
         req.body = debt.to_json
       end
       if response.status == 422 || response.status == 400 || response.status == 409
-        message = JSON.parse(response.body)
-        code = message['code']
-        message = message['message']
-        error = InvoiceCapture::InvalidRequest.new "#{code}: #{message}"
-        raise error
+        raise InvoiceCapture::InvalidRequest.from_json(response.body)
       else
         Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
