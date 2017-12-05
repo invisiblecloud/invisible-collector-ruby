@@ -1,6 +1,6 @@
 # Invoice Capture API Ruby client
 
-[![Gem Version](https://badge.fury.io/rb/invoice-capture-ruby.svg)](http://badge.fury.io/rb/invoice-capture-ruby)
+[![Gem Version](https://badge.fury.io/rb/invoice_capture.svg)](http://badge.fury.io/rb/invoice_capture)
 [![Travis Badge](https://travis-ci.org/invisiblecloud/invoice-capture-ruby.svg?branch=master)](https://travis-ci.org/invisiblecloud/invoice-capture-ruby)
 [![Code Climate](https://codeclimate.com/github/invisiblecloud/invoice-capture-ruby.svg)](https://codeclimate.com/github/invisiblecloud/invoice-capture-ruby)
 
