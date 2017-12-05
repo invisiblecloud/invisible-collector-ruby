@@ -14,6 +14,7 @@ module InvoiceCapture
   autoload :Customer, 'invoice_capture/models/customer'
   autoload :Debt, 'invoice_capture/models/debt'
 
+  autoload :DefaultHandlers, 'invoice_capture/resources/default_handlers'
   autoload :CompanyResource, 'invoice_capture/resources/company_resource'
   autoload :CustomerResource, 'invoice_capture/resources/customer_resource'
   autoload :DebtResource, 'invoice_capture/resources/debt_resource'

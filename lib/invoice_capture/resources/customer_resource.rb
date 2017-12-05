@@ -1,8 +1,13 @@
 module InvoiceCapture
   class CustomerResource
 
+    include InvoiceCapture::DefaultHandlers
+
     def initialize(options = {})
       @connection = options[:connection]
+      handle(400) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
+      handle(409) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
+      handle(422) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
     end
 
     def find(params={})
@@ -34,8 +39,8 @@ module InvoiceCapture
         req.headers['Content-Type'] = 'application/json'
         req.body = customer.to_json
       end
-      if response.status == 422 || response.status == 400 || response.status == 409
-        raise InvoiceCapture::InvalidRequest.from_json(response.body)
+      if handles.has_key? response.status
+        handles[response.status].call response
       else
         Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
