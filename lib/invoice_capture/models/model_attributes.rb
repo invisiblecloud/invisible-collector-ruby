@@ -1,12 +1,9 @@
 module InvoiceCapture
   module ModelAttributes
-    def attributes
-      @@attributes ||= []
-    end
 
     def attribute(name)
       attr_accessor name
-      attributes << name
+      (@@attributes ||= []) << name
     end
 
     def to_json

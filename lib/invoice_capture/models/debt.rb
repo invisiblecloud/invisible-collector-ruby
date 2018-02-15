@@ -15,6 +15,7 @@ module InvoiceCapture
     attribute :tax
     attribute :gross_total
     attribute :currency
+    attribute :attributes
 
     def initialize(options={})
       options = options.with_indifferent_access
@@ -26,6 +27,7 @@ module InvoiceCapture
       @due_date = options[:due_date]
       @customer = options[:customer]
       @items = options[:items]
+      @attributes = options[:attributes]
       @net_total = options[:net_total]
       @tax = options[:tax]
       @gross_total = options[:gross_total]
