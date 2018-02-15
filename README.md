@@ -52,6 +52,7 @@ client.customer #=> InvoiceCapture::CustomerResource
 
 Actions supported:
 
+* `client.customer.find(:attribute_hash)`
 * `client.customer.get(:id)`
 
 ## Development

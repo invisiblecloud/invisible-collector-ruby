@@ -20,7 +20,7 @@ describe InvoiceCapture::CustomerResource do
     [
       {"phone" => 234},
       {phone: 3242},
-      {as: '234123', phone: '32421'}
+      {as: '234123', email: 'sfasfsd', phone: '32421'}
     ].each do |query|
 
       it "returns a customer when using query '#{query}'" do
@@ -41,6 +41,7 @@ describe InvoiceCapture::CustomerResource do
         expect(customer.phone).to eq(parsed['phone'])
         expect(customer.city).to eq(parsed['city'])
         expect(customer.country).to eq(parsed['country'])
+        expect(customer.email).to eq(parsed['email'])
         expect(customer.gid).to eq(parsed['gid'])
       end
     end
@@ -72,6 +73,7 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
     end
 
@@ -102,6 +104,7 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
     end
 
@@ -132,6 +135,7 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
     end
 
@@ -151,6 +155,7 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
     end
 
