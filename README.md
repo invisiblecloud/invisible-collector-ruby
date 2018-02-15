@@ -9,7 +9,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'invoice-capture-ruby'
+gem 'invoice_capture'
 ```
 
 And then execute:
@@ -18,7 +18,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install invoice-capture-ruby
+    $ gem install invoice_capture
 
 ## Usage
 
