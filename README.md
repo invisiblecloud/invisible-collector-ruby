@@ -22,6 +22,12 @@ Or install it yourself as:
 
 ## Usage
 
+If necessary include it in you ruby code:
+
+```ruby
+require 'invoice_capture'
+```
+
 You'll need to retrieve an access token from Invoice Capture's dashboard.
 
 With your access token you can instantiate a new client with it:
