@@ -18,6 +18,11 @@ module InvoiceCapture
       end
     end
 
+    def alarm
+      resources[:alarm] ||= AlarmResource.new(connection: connection)
+      resources[:alarm]
+    end
+
     def company
       resources[:company] ||= CompanyResource.new(connection: connection)
       resources[:company]

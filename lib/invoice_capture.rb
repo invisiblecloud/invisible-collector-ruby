@@ -10,11 +10,13 @@ module InvoiceCapture
   autoload :InvalidRequest, 'invoice_capture/invalid_request'
 
   autoload :ModelAttributes, 'invoice_capture/models/model_attributes'
+  autoload :Alarm, 'invoice_capture/models/alarm'
   autoload :Company, 'invoice_capture/models/company'
   autoload :Customer, 'invoice_capture/models/customer'
   autoload :Debt, 'invoice_capture/models/debt'
 
   autoload :DefaultHandlers, 'invoice_capture/resources/default_handlers'
+  autoload :AlarmResource, 'invoice_capture/resources/alarm_resource'
   autoload :CompanyResource, 'invoice_capture/resources/company_resource'
   autoload :CustomerResource, 'invoice_capture/resources/customer_resource'
   autoload :DebtResource, 'invoice_capture/resources/debt_resource'

@@ -10,6 +10,12 @@ module InvoiceCapture
       handle(422) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
     end
 
+    def alarm(customer, params={})
+      id = customer.is_a?(Customer) ? customer.gid : customer
+      response = @connection.get("customers/#{id}/alarm", params)
+      Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+    end
+
     def find(params={})
       response = @connection.get('customers/find', params)
       JSON.parse(response.body).map { |json| Customer.new(json.deep_transform_keys(&:underscore)) }
