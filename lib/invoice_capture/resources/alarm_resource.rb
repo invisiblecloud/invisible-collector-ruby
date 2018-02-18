@@ -4,35 +4,30 @@ module InvoiceCapture
     include InvoiceCapture::DefaultHandlers
 
     def initialize(options = {})
-      @connection = options[:connection]
+      super(options)
       handle(400) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
-      handle(401) { |response| raise InvoiceCapture::Unauthorized.from_json(response.body) }
       handle(409) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
       handle(422) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
     end
 
     def close(alarm)
       gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
-      response = @connection.put("alarms/#{gid}/close", nil)
-      if handles.has_key? response.status
-        handles[response.status].call response
-      else
-        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      response = execute do |connection|
+        connection.put("alarms/#{gid}/close", nil)
       end
+      Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
     def save_event(alarm, event)
       gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
-      response = @connection.post do |req|
-        req.url "alarms/#{gid}/events"
-        req.headers['Content-Type'] = 'application/json'
-        req.body = event.to_json
+      response = execute do |connection|
+        connection.post do |req|
+          req.url "alarms/#{gid}/events"
+          req.headers['Content-Type'] = 'application/json'
+          req.body = event.to_json
+        end
       end
-      if handles.has_key? response.status
-        handles[response.status].call response
-      else
-        AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-      end
+      AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
     def get(gid)

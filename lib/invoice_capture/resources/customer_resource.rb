@@ -4,9 +4,8 @@ module InvoiceCapture
     include InvoiceCapture::DefaultHandlers
 
     def initialize(options = {})
-      @connection = options[:connection]
+      super(options)
       handle(400) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
-      handle(401) { |response| raise InvoiceCapture::Unauthorized.from_json(response.body) }
       handle(409) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
       handle(422) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
     end
@@ -27,7 +26,11 @@ module InvoiceCapture
 
     def find(params={})
       response = @connection.get('customers/find', params)
-      JSON.parse(response.body).map { |json| Customer.new(json.deep_transform_keys(&:underscore)) }
+      if handles.has_key? response.status
+        handles[response.status].call response
+      else
+        JSON.parse(response.body).map { |json| Customer.new(json.deep_transform_keys(&:underscore)) }
+      end
     end
 
     def get(id)

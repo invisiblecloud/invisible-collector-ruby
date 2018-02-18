@@ -1,8 +1,10 @@
 module InvoiceCapture
   class CompanyResource
+    
+    include InvoiceCapture::DefaultHandlers
 
     def initialize(options = {})
-      @connection = options[:connection]
+      super(options)
     end
 
     def get
