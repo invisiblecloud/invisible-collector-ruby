@@ -12,7 +12,21 @@ module InvoiceCapture
 
     def close(alarm)
       gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
-      Alarm.new(JSON.parse(@connection.put("/alarms/#{gid}/close", nil).body).deep_transform_keys(&:underscore))
+      Alarm.new(JSON.parse(@connection.put("alarms/#{gid}/close", nil).body).deep_transform_keys(&:underscore))
+    end
+
+    def save_event(alarm, event)
+      gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
+      response = @connection.post do |req|
+        req.url "alarms/#{gid}/events"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = event.to_json
+      end
+      if handles.has_key? response.status
+        handles[response.status].call response
+      else
+        AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      end
     end
 
     def get(gid)

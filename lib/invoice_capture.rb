@@ -11,6 +11,7 @@ module InvoiceCapture
 
   autoload :ModelAttributes, 'invoice_capture/models/model_attributes'
   autoload :Alarm, 'invoice_capture/models/alarm'
+  autoload :AlarmEvent, 'invoice_capture/models/alarm_event'
   autoload :Company, 'invoice_capture/models/company'
   autoload :Customer, 'invoice_capture/models/customer'
   autoload :Debt, 'invoice_capture/models/debt'

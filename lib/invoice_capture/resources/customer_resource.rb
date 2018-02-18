@@ -13,7 +13,11 @@ module InvoiceCapture
     def alarm(customer, params={})
       id = customer.is_a?(Customer) ? customer.gid : customer
       response = @connection.get("customers/#{id}/alarm", params)
-      Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      if response.status == 404
+        nil
+      else
+        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      end
     end
 
     def find(params={})

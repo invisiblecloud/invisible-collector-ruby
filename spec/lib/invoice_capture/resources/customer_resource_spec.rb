@@ -8,6 +8,14 @@ describe InvoiceCapture::CustomerResource do
 
   describe '#alarm' do
 
+    it 'returns null if not found' do
+      fixture = api_fixture('customer/alarm')
+      stub_do_api("/customers/something/alarm").to_return(body: fixture, status: 404)
+      alarm = resource.alarm('something')
+
+      expect(alarm).to be_nil
+    end
+
     it 'returns an alarm' do
       fixture = api_fixture('customer/alarm')
       parsed  = JSON.load(fixture)
