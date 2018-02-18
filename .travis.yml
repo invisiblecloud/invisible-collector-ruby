@@ -3,3 +3,16 @@ language: ruby
 rvm:
   - 2.3.1
 before_install: gem install bundler -v 1.13.6
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=28b2c73f6b47baf61caa664edc07db0d8f52ddd31a50b3a3b1213a8213f896a8
+    - CF_RUN_PERM_SPECS=false
