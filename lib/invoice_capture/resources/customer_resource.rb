@@ -6,6 +6,7 @@ module InvoiceCapture
     def initialize(options = {})
       @connection = options[:connection]
       handle(400) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
+      handle(401) { |response| raise InvoiceCapture::Unauthorized.from_json(response.body) }
       handle(409) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
       handle(422) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
     end
