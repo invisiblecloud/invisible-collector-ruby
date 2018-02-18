@@ -6,33 +6,6 @@ describe InvoiceCapture::CustomerResource do
   let(:connection) { client.connection }
   let(:resource) { described_class.new(connection: connection) }
 
-  describe '#alarm' do
-
-    it 'returns null if not found' do
-      fixture = api_fixture('customer/alarm')
-      stub_do_api("/customers/something/alarm").to_return(body: fixture, status: 404)
-      alarm = resource.alarm('something')
-
-      expect(alarm).to be_nil
-    end
-
-    it 'returns an alarm' do
-      fixture = api_fixture('customer/alarm')
-      parsed  = JSON.load(fixture)
-
-      stub_do_api("/customers/something/alarm").to_return(body: fixture)
-      alarm = resource.alarm('something')
-
-      expect(alarm).to be_kind_of(InvoiceCapture::Alarm)
-
-      expect(alarm.gid).to eq(parsed['gid'])
-      expect(alarm.status).to eq(parsed['status'])
-      expect(alarm.createdAt).to eq(parsed['createdAt'])
-      expect(alarm.updatedAt).to eq(parsed['updatedAt'])
-    end
-
-  end
-
   describe '#find' do
 
     it 'returns an empty list' do

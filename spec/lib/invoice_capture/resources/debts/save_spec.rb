@@ -8,31 +8,23 @@ describe InvoiceCapture::DebtResource do
 
   describe '#save' do
 
-    it 'fails on json error' do
-      fixture = api_fixture('debt/invalid')
-      stub_do_api("/debts", :post).with(body: '{}').to_return(body: fixture, status: 400)
-      attrs = {}
-      expect {
-        resource.save attrs
-      }.to raise_exception(InvoiceCapture::InvalidRequest).with_message('400: Invalid JSON')
-    end
+    {
+      invalid: { code: 400, exception: InvoiceCapture::InvalidRequest, message: 'Invalid JSON' },
+      unauthorized: { code: 401, exception: InvoiceCapture::Unauthorized, message: 'Credentials are required to access this resource' },
+      not_found: { code: 404, exception: InvoiceCapture::NotFound, message: 'Debt not found' },
+      conflict: { code: 409, exception: InvoiceCapture::InvalidRequest, message: 'Debt already registered' },
+      unprocessable: { code: 422, exception: InvoiceCapture::InvalidRequest, message: 'Unprocessable request' }
+    }.each do |key, attrs|
 
-    it 'fails on conflict' do
-      fixture = api_fixture('debt/conflict')
-      stub_do_api("/debts", :post).with(body: '{}').to_return(body: fixture, status: 409)
-      attrs = {}
-      expect {
-        resource.save attrs
-      }.to raise_exception(InvoiceCapture::InvalidRequest).with_message('409: Debt already registered')
-    end
+      it "fails on #{key} error" do
+        fixture = api_fixture("debt/#{key}")
+        stub_do_api("/debts", :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
+        params = {}
+        expect {
+          resource.save params
+        }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+      end
 
-    it 'fails on invalid request' do
-      fixture = api_fixture('debt/wrong_arguments')
-      stub_do_api("/debts", :post).with(body: '{}').to_return(body: fixture, status: 422)
-      attrs = {}
-      expect {
-        resource.save attrs
-      }.to raise_exception(InvoiceCapture::InvalidRequest).with_message('422: Debt already registered')
     end
 
     it 'uses a debt object' do

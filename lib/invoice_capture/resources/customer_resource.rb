@@ -17,7 +17,11 @@ module InvoiceCapture
       if response.status == 404
         nil
       else
-        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        if handles.has_key? response.status
+          handles[response.status].call response
+        else
+          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        end
       end
     end
 
