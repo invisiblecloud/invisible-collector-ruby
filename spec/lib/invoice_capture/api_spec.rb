@@ -7,7 +7,24 @@ describe InvoiceCapture::API do
   describe '#initialize' do
 
     it 'initializes with an api token' do
-      expect(client.api_token).to eq('bogus_token')  
+      expect(client.api_token).to eq('bogus_token')
+    end
+
+  end
+
+  describe '#resources' do
+
+    {
+      company: InvoiceCapture::CompanyResource,
+      customer: InvoiceCapture::CustomerResource,
+      debt: InvoiceCapture::DebtResource,
+      alarm: InvoiceCapture::AlarmResource
+    }.each do |key, value|
+
+      it "supports #{key} requests" do
+        expect(client.send key).to be_a(value)
+      end
+
     end
 
   end
