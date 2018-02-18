@@ -6,6 +6,7 @@ module InvoiceCapture
     attribute :name
     attribute :vat_number
     attribute :gid
+    attribute :external_id
     attribute :email
     attribute :phone
     attribute :address
@@ -18,6 +19,7 @@ module InvoiceCapture
       @name = options[:name]
       @vat_number = options[:vat_number]
       @gid = options[:gid]
+      @external_id = options[:external_id]
       @email = options[:email]
       @phone = options[:phone]
       @address = options[:address]

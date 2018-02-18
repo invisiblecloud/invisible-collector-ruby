@@ -65,11 +65,13 @@ describe InvoiceCapture::CustomerResource do
         expect(customer.name).to eq(parsed['name'])
         expect(customer.vat_number).to eq(parsed['vatNumber'])
         expect(customer.address).to eq(parsed['address'])
-        expect(customer.phone).to eq(parsed['phone'])
+        expect(customer.zip_code).to eq(parsed['zipCode'])
         expect(customer.city).to eq(parsed['city'])
         expect(customer.country).to eq(parsed['country'])
+        expect(customer.phone).to eq(parsed['phone'])
         expect(customer.email).to eq(parsed['email'])
         expect(customer.gid).to eq(parsed['gid'])
+        expect(customer.external_id).to eq(parsed['externalId'])
       end
     end
 
@@ -97,11 +99,13 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
       expect(customer.address).to eq(parsed['address'])
-      expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.zip_code).to eq(parsed['zipCode'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.phone).to eq(parsed['phone'])
       expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
+      expect(customer.external_id).to eq(parsed['externalId'])
     end
 
   end
@@ -128,11 +132,13 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
       expect(customer.address).to eq(parsed['address'])
-      expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.zip_code).to eq(parsed['zipCode'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.phone).to eq(parsed['phone'])
       expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
+      expect(customer.external_id).to eq(parsed['externalId'])
     end
 
   end
@@ -159,11 +165,13 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
       expect(customer.address).to eq(parsed['address'])
-      expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.zip_code).to eq(parsed['zipCode'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.phone).to eq(parsed['phone'])
       expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
+      expect(customer.external_id).to eq(parsed['externalId'])
     end
 
     it 'returns the created customer using customer object' do
@@ -179,11 +187,13 @@ describe InvoiceCapture::CustomerResource do
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
       expect(customer.address).to eq(parsed['address'])
-      expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.zip_code).to eq(parsed['zipCode'])
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
+      expect(customer.phone).to eq(parsed['phone'])
       expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
+      expect(customer.external_id).to eq(parsed['externalId'])
     end
 
   end
