@@ -8,6 +8,7 @@ module InvoiceCapture
 
   autoload :NotFound, 'invoice_capture/not_found'
   autoload :InvalidRequest, 'invoice_capture/invalid_request'
+  autoload :Unauthorized, 'invoice_capture/unauthorized'
 
   autoload :ModelAttributes, 'invoice_capture/models/model_attributes'
   autoload :Alarm, 'invoice_capture/models/alarm'

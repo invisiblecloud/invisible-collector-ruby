@@ -6,13 +6,19 @@ module InvoiceCapture
     def initialize(options = {})
       @connection = options[:connection]
       handle(400) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
+      handle(401) { |response| raise InvoiceCapture::Unauthorized.from_json(response.body) }
       handle(409) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
       handle(422) { |response| raise InvoiceCapture::InvalidRequest.from_json(response.body) }
     end
 
     def close(alarm)
       gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
-      Alarm.new(JSON.parse(@connection.put("alarms/#{gid}/close", nil).body).deep_transform_keys(&:underscore))
+      response = @connection.put("alarms/#{gid}/close", nil)
+      if handles.has_key? response.status
+        handles[response.status].call response
+      else
+        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      end
     end
 
     def save_event(alarm, event)
@@ -34,7 +40,11 @@ module InvoiceCapture
       if response.status == 404
         nil
       else
-        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        if handles.has_key? response.status
+          handles[response.status].call response
+        else
+          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        end
       end
     end
 
@@ -43,7 +53,11 @@ module InvoiceCapture
       if response.status == 404
         raise InvoiceCapture::NotFound.from_json(response.body)
       else
-        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        if handles.has_key? response.status
+          handles[response.status].call response
+        else
+          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        end
       end
     end
 

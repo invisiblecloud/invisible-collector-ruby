@@ -8,13 +8,22 @@ describe InvoiceCapture::AlarmResource do
 
   describe '#save_event' do
 
-    it 'fails on json error' do
-      fixture = api_fixture('alarm/invalid_json')
-      stub_do_api("/alarms/something/events", :post).with(body: '{}').to_return(body: fixture, status: 400)
-      attrs = {}
-      expect {
-        resource.save_event "something", attrs
-      }.to raise_exception(InvoiceCapture::InvalidRequest).with_message('400: Invalid JSON')
+    {
+      invalid: { code: 400, exception: InvoiceCapture::InvalidRequest, message: 'Invalid JSON' },
+      unauthorized: { code: 401, exception: InvoiceCapture::Unauthorized, message: 'Credentials are required to access this resource' },
+      conflict: { code: 409, exception: InvoiceCapture::InvalidRequest, message: 'Random conflict error' },
+      unprocessable: { code: 422, exception: InvoiceCapture::InvalidRequest, message: 'Unprocessable request' }
+    }.each do |key, attrs|
+
+      it "fails on #{key} error" do
+        fixture = api_fixture("alarm/#{key}")
+        stub_do_api("/alarms/something/events", :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
+        params = {}
+        expect {
+          resource.save_event "something", params
+        }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+      end
+
     end
 
     it 'uses an alarm event object' do
@@ -79,12 +88,23 @@ describe InvoiceCapture::AlarmResource do
 
   describe '#get!' do
 
-    it 'fails if not found' do
-      fixture = api_fixture('alarm/not_found')
-      stub_do_api("/alarms/something").to_return(body: fixture, status: 404)
-      expect {
-        resource.get!('something')
-      }.to raise_exception(InvoiceCapture::NotFound).with_message('404: Alarm not found')
+    {
+      invalid: { code: 400, exception: InvoiceCapture::InvalidRequest, message: 'Invalid JSON' },
+      not_found: { code: 404, exception: InvoiceCapture::NotFound, message: 'Alarm not found' },
+      unauthorized: { code: 401, exception: InvoiceCapture::Unauthorized, message: 'Credentials are required to access this resource' },
+      conflict: { code: 409, exception: InvoiceCapture::InvalidRequest, message: 'Random conflict error' },
+      unprocessable: { code: 422, exception: InvoiceCapture::InvalidRequest, message: 'Unprocessable request' }
+    }.each do |key, attrs|
+
+      it "fails on #{key} error" do
+        fixture = api_fixture("alarm/#{key}")
+        stub_do_api("/alarms/something").to_return(body: fixture, status: attrs[:code])
+        params = {}
+        expect {
+          resource.get!('something')
+        }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+      end
+
     end
 
     it 'returns the customer info using gid' do
@@ -105,6 +125,24 @@ describe InvoiceCapture::AlarmResource do
   end
 
   describe '#close' do
+
+    {
+      invalid: { code: 400, exception: InvoiceCapture::InvalidRequest, message: 'Invalid JSON' },
+      unauthorized: { code: 401, exception: InvoiceCapture::Unauthorized, message: 'Credentials are required to access this resource' },
+      conflict: { code: 409, exception: InvoiceCapture::InvalidRequest, message: 'Random conflict error' },
+      unprocessable: { code: 422, exception: InvoiceCapture::InvalidRequest, message: 'Unprocessable request' }
+    }.each do |key, attrs|
+
+      it "fails on #{key} error" do
+        fixture = api_fixture("alarm/#{key}")
+        stub_do_api("/alarms/something/close", :put).with(body: nil).to_return(body: fixture, status: attrs[:code])
+        params = {}
+        expect {
+          resource.close('something')
+        }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+      end
+
+    end
 
     it 'closes an alarm using gid' do
       fixture = api_fixture('alarm/close')
