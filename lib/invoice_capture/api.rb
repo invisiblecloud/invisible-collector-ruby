@@ -4,7 +4,7 @@ module InvoiceCapture
 
   class API
 
-    INVOICECAPTURE_API = 'https://api.invcapture.com'
+    INVISIBLECOLLECTOR_API = 'https://api.invisiblecollector.com'
 
     attr_reader :api_token
 
@@ -46,7 +46,7 @@ module InvoiceCapture
 
     def connection_options
       {
-        url: INVOICECAPTURE_API,
+        url: INVISIBLECOLLECTOR_API,
         headers: {
           content_type: 'application/json',
           'User-Agent' => "InvoiceCapture Ruby v#{InvoiceCapture::VERSION}",
