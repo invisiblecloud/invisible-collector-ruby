@@ -61,6 +61,18 @@ Actions supported:
 * `client.customer.find(:attribute_hash)`
 * `client.customer.get(:id)`
 
+### Alarm resource
+
+```ruby
+client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
+client.alarm #=> InvoiceCapture::AlarmResource
+```
+
+Actions supported:
+
+* `client.alarm.close(:id)`
+* `client.alarm.get(:id)`
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
