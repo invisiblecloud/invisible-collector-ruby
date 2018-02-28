@@ -26,35 +26,40 @@ describe InvoiceCapture::AlarmResource do
 
     end
 
-    it 'uses an alarm event object' do
-      fixture = api_fixture('alarm/save_event')
-      parsed  = JSON.load(fixture)
+    [
+      { gid: SecureRandom.uuid, origin: 'potatoes@farm.com', destination: 'onions@farm.com' },
+      { gid: SecureRandom.uuid, origin: 'potatoes@farm.com', destination: 'onions@farm.com', debts: ["FT 1", "FT 2"] }
+    ].each do |attrs|
 
-      attrs = { gid: SecureRandom.uuid, origin: 'potatoes@farm.com', destination: 'onions@farm.com' }
-      event = InvoiceCapture::AlarmEvent.new(attrs)
-      stub_do_api("/alarms/something/events", :post).with(body: event.to_json).to_return(body: fixture, status: 201)
-      event = resource.save_event "something", event
+      it 'using an event object' do
+        fixture = api_fixture('alarm/save_event')
+        parsed  = JSON.load(fixture)
 
-      expect(event).to be_kind_of(InvoiceCapture::AlarmEvent)
+        event = InvoiceCapture::AlarmEvent.new(attrs)
+        stub_do_api("/alarms/something/events", :post).with(body: event.to_json).to_return(body: fixture, status: 201)
+        event = resource.save_event "something", event
 
-      expect(event.gid).to eq(parsed['gid'])
-      expect(event.origin).to eq(parsed['origin'])
-      expect(event.destination).to eq(parsed['destination'])
-    end
+        expect(event).to be_kind_of(InvoiceCapture::AlarmEvent)
 
-    it 'uses an alarm event hash' do
-      fixture = api_fixture('alarm/save_event')
-      parsed  = JSON.load(fixture)
+        expect(event.gid).to eq(parsed['gid'])
+        expect(event.origin).to eq(parsed['origin'])
+        expect(event.destination).to eq(parsed['destination'])
+      end
 
-      attrs = { gid: SecureRandom.uuid, origin: 'potatoes@farm.com', destination: 'onions@farm.com' }
-      stub_do_api("/alarms/something/events", :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
-      event = resource.save_event "something", attrs
+      it 'using an event hash' do
+        fixture = api_fixture('alarm/save_event')
+        parsed  = JSON.load(fixture)
 
-      expect(event).to be_kind_of(InvoiceCapture::AlarmEvent)
+        stub_do_api("/alarms/something/events", :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
+        event = resource.save_event "something", attrs
 
-      expect(event.gid).to eq(parsed['gid'])
-      expect(event.origin).to eq(parsed['origin'])
-      expect(event.destination).to eq(parsed['destination'])
+        expect(event).to be_kind_of(InvoiceCapture::AlarmEvent)
+
+        expect(event.gid).to eq(parsed['gid'])
+        expect(event.origin).to eq(parsed['origin'])
+        expect(event.destination).to eq(parsed['destination'])
+      end
+
     end
 
   end
