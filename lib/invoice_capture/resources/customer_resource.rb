@@ -52,30 +52,26 @@ module InvoiceCapture
     end
 
     def save(customer = {})
-      response = @connection.post do |req|
-        req.url '/customers'
-        req.headers['Content-Type'] = 'application/json'
-        req.body = customer.to_json
+      response = execute do |connection|
+        connection.post do |req|
+          req.url '/customers'
+          req.headers['Content-Type'] = 'application/json'
+          req.body = customer.to_json
+        end
       end
-      if handles.has_key? response.status
-        handles[response.status].call response
-      else
-        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-      end
+      Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
     def update(customer = {})
       body = customer.is_a?(Customer) ? customer.to_h : customer
-      response = @connection.put do |req|
-        req.url "/customers/#{body[:gid]}"
-        req.headers['Content-Type'] = 'application/json'
-        req.body = body.to_json
+      response = execute do |connection|
+        connection.put do |req|
+          req.url "/customers/#{body[:gid]}"
+          req.headers['Content-Type'] = 'application/json'
+          req.body = body.to_json
+        end
       end
-      if handles.has_key? response.status
-        handles[response.status].call response
-      else
-        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-      end
+      Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
   end
 end
