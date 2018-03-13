@@ -52,13 +52,7 @@ module InvoiceCapture
     end
 
     def save(customer = {})
-      response = execute do |connection|
-        connection.post do |req|
-          req.url '/customers'
-          req.headers['Content-Type'] = 'application/json'
-          req.body = customer.to_json
-        end
-      end
+      response = execute_post('/customers', customer)
       Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 

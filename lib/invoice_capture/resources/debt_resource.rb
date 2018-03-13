@@ -13,16 +13,14 @@ module InvoiceCapture
 
     def cancel(debt = {})
       id = debt.kind_of?(InvoiceCapture::Debt) ? debt.external_id : debt
-      response = @connection.put("debts/#{id}/cancel")
-      if handles.has_key? response.status
-        handles[response.status].call response
-      else
-        Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      response = execute do |connection|
+        connection.put("debts/#{id}/cancel")
       end
+      Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
     def find(params={})
-      response = @connection.get('debts/find', params)
+      response = execute_get('debts/find', params)
       JSON.parse(response.body).map { |json| Debt.new(json.deep_transform_keys(&:underscore)) }
     end
 
@@ -36,16 +34,8 @@ module InvoiceCapture
     end
 
     def save(debt)
-      response = @connection.post do |req|
-        req.url 'debts'
-        req.headers['Content-Type'] = 'application/json'
-        req.body = debt.to_json
-      end
-      if handles.has_key? response.status
-        handles[response.status].call response
-      else
-        Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-      end
+      response = execute_post('debts', debt)
+      Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
   end

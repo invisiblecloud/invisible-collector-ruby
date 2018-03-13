@@ -20,13 +20,7 @@ module InvoiceCapture
 
     def save_event(alarm, event)
       gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
-      response = execute do |connection|
-        connection.post do |req|
-          req.url "alarms/#{gid}/events"
-          req.headers['Content-Type'] = 'application/json'
-          req.body = event.to_json
-        end
-      end
+      response = execute_post("alarms/#{gid}/events", event)
       AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
