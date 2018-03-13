@@ -60,6 +60,7 @@ Actions supported:
 
 * `client.customer.find(:attribute_hash)`
 * `client.customer.get(:id)`
+* `client.customer.update(:attribute_hash)`
 
 ### Alarm resource
 

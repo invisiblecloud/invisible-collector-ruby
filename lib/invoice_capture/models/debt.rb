@@ -1,21 +1,21 @@
 module InvoiceCapture
 
   class Debt
-    extend InvoiceCapture::ModelAttributes
+    include InvoiceCapture::ModelAttributes
 
-    attribute :number
-    attribute :external_id
-    attribute :type
-    attribute :status
-    attribute :date
-    attribute :due_date
-    attribute :customer
-    attribute :items
-    attribute :net_total
-    attribute :tax
-    attribute :gross_total
-    attribute :currency
-    attribute :attributes
+    attr_accessor :number
+    attr_accessor :external_id
+    attr_accessor :type
+    attr_accessor :status
+    attr_accessor :date
+    attr_accessor :due_date
+    attr_accessor :customer
+    attr_accessor :items
+    attr_accessor :net_total
+    attr_accessor :tax
+    attr_accessor :gross_total
+    attr_accessor :currency
+    attr_accessor :attributes
 
     def initialize(options={})
       options = options.with_indifferent_access

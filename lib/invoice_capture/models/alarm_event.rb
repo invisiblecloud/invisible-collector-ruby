@@ -1,12 +1,12 @@
 module InvoiceCapture
 
   class AlarmEvent
-    extend InvoiceCapture::ModelAttributes
+    include InvoiceCapture::ModelAttributes
 
-    attribute :gid
-    attribute :origin
-    attribute :destination
-    attribute :debts
+    attr_accessor :gid
+    attr_accessor :origin
+    attr_accessor :destination
+    attr_accessor :debts
 
     def initialize(options={})
       options = options.with_indifferent_access

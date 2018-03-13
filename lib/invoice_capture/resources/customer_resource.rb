@@ -63,5 +63,19 @@ module InvoiceCapture
         Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
+
+    def update(customer = {})
+      body = customer.is_a?(Customer) ? customer.to_h : customer
+      response = @connection.put do |req|
+        req.url "/customers/#{body[:gid]}"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = body.to_json
+      end
+      if handles.has_key? response.status
+        handles[response.status].call response
+      else
+        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+      end
+    end
   end
 end

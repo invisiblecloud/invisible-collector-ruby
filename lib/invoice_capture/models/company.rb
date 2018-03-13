@@ -1,16 +1,16 @@
 module InvoiceCapture
 
   class Company
-    extend InvoiceCapture::ModelAttributes
+    include InvoiceCapture::ModelAttributes
 
-    attribute :name
-    attribute :vat_number
-    attribute :address
-    attribute :zip_code
-    attribute :city
-    attribute :country
-    attribute :gid
-    attribute :notifications_enabled
+    attr_accessor :name
+    attr_accessor :vat_number
+    attr_accessor :address
+    attr_accessor :zip_code
+    attr_accessor :city
+    attr_accessor :country
+    attr_accessor :gid
+    attr_accessor :notifications_enabled
 
     def initialize(options={})
       options = options.with_indifferent_access
