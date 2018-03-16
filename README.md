@@ -1,15 +1,15 @@
-# Invoice Capture API Ruby client
+# Invisible Collector API Ruby client
 
-[![Gem Version](https://badge.fury.io/rb/invoice_capture.svg)](http://badge.fury.io/rb/invoice_capture)
-[![Travis Badge](https://travis-ci.org/invisiblecloud/invoice-capture-ruby.svg?branch=master)](https://travis-ci.org/invisiblecloud/invoice-capture-ruby)
-[![Code Climate](https://codeclimate.com/github/invisiblecloud/invoice-capture-ruby.svg)](https://codeclimate.com/github/invisiblecloud/invoice-capture-ruby)
+[![Gem Version](https://badge.fury.io/rb/invisible_collector.svg)](http://badge.fury.io/rb/invisible_collector)
+[![Travis Badge](https://travis-ci.org/invisiblecloud/invisible-collector-ruby.svg?branch=master)](https://travis-ci.org/invisiblecloud/invisible-collector-ruby)
+[![Code Climate](https://codeclimate.com/github/invisiblecloud/invisible-collector-ruby.svg)](https://codeclimate.com/github/invisiblecloud/invisible-collector-ruby)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'invoice_capture'
+gem 'invisible_collector'
 ```
 
 And then execute:
@@ -18,22 +18,22 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install invoice_capture
+    $ gem install invisible_collector
 
 ## Usage
 
 If necessary include it in you ruby code:
 
 ```ruby
-require 'invoice_capture'
+require 'invisible_collector'
 ```
 
-You'll need to retrieve an access token from Invoice Capture's dashboard.
+You'll need to retrieve an access token from Invisible Collector's dashboard.
 
 With your access token you can instantiate a new client with it:
 
 ```ruby
-client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
+client = InvisibleCollector::API.new(api_token: 'YOUR_TOKEN')
 ```
 
 ## Resources
@@ -41,8 +41,8 @@ client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
 ### Company resource
 
 ```ruby
-client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
-client.company #=> InvoiceCapture::CompanyResource
+client = InvisibleCollector::API.new(api_token: 'YOUR_TOKEN')
+client.company #=> InvisibleCollector::CompanyResource
 ```
 
 Actions supported:
@@ -52,8 +52,8 @@ Actions supported:
 ### Customer resource
 
 ```ruby
-client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
-client.customer #=> InvoiceCapture::CustomerResource
+client = InvisibleCollector::API.new(api_token: 'YOUR_TOKEN')
+client.customer #=> InvisibleCollector::CustomerResource
 ```
 
 Actions supported:
@@ -65,8 +65,8 @@ Actions supported:
 ### Alarm resource
 
 ```ruby
-client = InvoiceCapture::API.new(api_token: 'YOUR_TOKEN')
-client.alarm #=> InvoiceCapture::AlarmResource
+client = InvisibleCollector::API.new(api_token: 'YOUR_TOKEN')
+client.alarm #=> InvisibleCollector::AlarmResource
 ```
 
 Actions supported:
@@ -82,9 +82,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/invisiblecloud/invoice-capture-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/invisiblecloud/invisible-collector-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-1. Fork it ( https://github.com/invisiblecloud/invoice-capture-ruby/fork )
+1. Fork it ( https://github.com/invisiblecloud/invisible-collector-ruby/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
