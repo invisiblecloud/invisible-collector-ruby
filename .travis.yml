@@ -14,5 +14,5 @@ after_script:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=28b2c73f6b47baf61caa664edc07db0d8f52ddd31a50b3a3b1213a8213f896a8
+    - CC_TEST_REPORTER_ID=65e879193e48d313d785a1b0bdef2f8dfecd54417b105e40fcb6b6f3874fc0b9
     - CF_RUN_PERM_SPECS=false
