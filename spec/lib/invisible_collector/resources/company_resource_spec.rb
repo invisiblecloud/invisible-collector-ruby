@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe InvisibleCollector::CompanyResource do
 
-  let(:client) { InvisibleCollector::API.new(api_token: 'bogus_token') }
-  let(:connection) { client.connection }
-  let(:resource) { described_class.new(connection: connection) }
+  let(:client) {InvisibleCollector::API.new(api_token: 'bogus_token')}
+  let(:connection) {client.connection}
+  let(:resource) {described_class.new(connection: connection)}
 
   describe '#get' do
 
     it 'returns the company info' do
       fixture = api_fixture('company/get')
-      parsed  = JSON.load(fixture)
+      parsed = JSON.load(fixture)
 
       stub_do_api('/companies').to_return(body: fixture)
       company = resource.get
@@ -33,7 +33,7 @@ describe InvisibleCollector::CompanyResource do
 
     it 'updates the company info' do
       fixture = api_fixture('company/update')
-      parsed  = JSON.load(fixture)
+      parsed = JSON.load(fixture)
 
       company = InvisibleCollector::Company.new
       as_json = {}
@@ -58,7 +58,7 @@ describe InvisibleCollector::CompanyResource do
 
     it 'enables notifications' do
       fixture = api_fixture('company/enableNotifications')
-      parsed  = JSON.load(fixture)
+      parsed = JSON.load(fixture)
 
       stub_do_api('/companies/enableNotifications', :put).to_return(body: fixture)
       company = resource.enable_notifications
@@ -81,7 +81,7 @@ describe InvisibleCollector::CompanyResource do
 
     it 'disables notifications' do
       fixture = api_fixture('company/disableNotifications')
-      parsed  = JSON.load(fixture)
+      parsed = JSON.load(fixture)
 
       stub_do_api('/companies/disableNotifications', :put).to_return(body: fixture)
       company = resource.disable_notifications
