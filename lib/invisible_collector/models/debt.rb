@@ -3,6 +3,7 @@ module InvisibleCollector
   class Debt
     include InvisibleCollector::ModelAttributes
 
+    attr_accessor :id
     attr_accessor :number
     attr_accessor :external_id
     attr_accessor :type
@@ -20,6 +21,7 @@ module InvisibleCollector
 
     def initialize(options={})
       options = options.with_indifferent_access
+      @id = options[:id]
       @number = options[:number]
       @external_id = options[:external_id]
       @type = options[:type]

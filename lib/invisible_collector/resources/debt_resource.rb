@@ -39,7 +39,7 @@ module InvisibleCollector
     end
 
     def save_debit(debt, debit)
-      id = debt.is_a?(Debt) ? debt.gid : debt
+      id = debt.is_a?(Debt) ? debt.id : debt
       response = execute_post("debts/#{id}/debits", debit)
       Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end

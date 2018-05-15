@@ -42,6 +42,24 @@ describe InvisibleCollector::DebtResource do
       expect(debit.gross_total).to eq(parsed['grossTotal'])
     end
 
+    it 'uses a debit object and a debt object' do
+      fixture = api_fixture('debt/save_debit')
+      parsed  = JSON.load(fixture)
+
+      attrs = { number: 'sdfsad', date: Date.today, gross_total: 50.0 }
+      gid = SecureRandom.uuid
+      debt = InvisibleCollector::Debt.new(id: gid)
+      debit = InvisibleCollector::Debit.new(attrs)
+      stub_do_api("/debts/#{gid}/debits", :post).with(body: debit.to_json).to_return(body: fixture)
+      debit = resource.save_debit(debt, debit)
+
+      expect(debit).to be_kind_of(InvisibleCollector::Debit)
+
+      expect(debit.number).to eq(parsed['number'])
+      expect(debit.date).to eq(parsed['date'])
+      expect(debit.gross_total).to eq(parsed['grossTotal'])
+    end
+
     it 'uses a debit hash' do
       fixture = api_fixture('debt/save_debit')
       parsed  = JSON.load(fixture)
