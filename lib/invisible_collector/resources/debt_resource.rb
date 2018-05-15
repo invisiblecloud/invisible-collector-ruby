@@ -19,13 +19,13 @@ module InvisibleCollector
       Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
-    def find(params={})
+    def find(params = {})
       response = execute_get('debts/find', params)
       JSON.parse(response.body).map { |json| Debt.new(json.deep_transform_keys(&:underscore)) }
     end
 
-    def get(id)
-      response = @connection.get("debts/#{id}")
+    def get(id, attrs = {})
+      response = @connection.get("debts/#{id}", attrs)
       if response.status == 404
         nil
       else
@@ -36,6 +36,12 @@ module InvisibleCollector
     def save(debt)
       response = execute_post('debts', debt)
       Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+    end
+
+    def save_debit(debt, debit)
+      id = debt.is_a?(Debt) ? debt.gid : debt
+      response = execute_post("debts/#{id}/debits", debit)
+      Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
   end

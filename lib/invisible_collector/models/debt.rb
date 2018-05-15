@@ -16,6 +16,7 @@ module InvisibleCollector
     attr_accessor :gross_total
     attr_accessor :currency
     attr_accessor :attributes
+    attr_accessor :debits
 
     def initialize(options={})
       options = options.with_indifferent_access

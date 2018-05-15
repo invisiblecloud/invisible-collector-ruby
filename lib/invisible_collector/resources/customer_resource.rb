@@ -10,7 +10,7 @@ module InvisibleCollector
       handle(422) { |response| raise InvisibleCollector::InvalidRequest.from_json(response.body) }
     end
 
-    def alarm(customer, params={})
+    def alarm(customer, params = {})
       id = customer.is_a?(Customer) ? customer.gid : customer
       response = @connection.get("customers/#{id}/alarm", params)
       if response.status == 404
@@ -24,7 +24,7 @@ module InvisibleCollector
       end
     end
 
-    def find(params={})
+    def find(params = {})
       response = @connection.get('customers/find', params)
       if handles.has_key? response.status
         handles[response.status].call response

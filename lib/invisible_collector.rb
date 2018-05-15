@@ -16,6 +16,7 @@ module InvisibleCollector
   autoload :Company, 'invisible_collector/models/company'
   autoload :Customer, 'invisible_collector/models/customer'
   autoload :Debt, 'invisible_collector/models/debt'
+  autoload :Debit, 'invisible_collector/models/debit'
 
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
   autoload :AlarmResource, 'invisible_collector/resources/alarm_resource'
