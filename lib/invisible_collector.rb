@@ -15,6 +15,7 @@ module InvisibleCollector
   autoload :AlarmEvent, 'invisible_collector/models/alarm_event'
   autoload :Company, 'invisible_collector/models/company'
   autoload :Customer, 'invisible_collector/models/customer'
+  autoload :Group, 'invisible_collector/models/group'
   autoload :Debt, 'invisible_collector/models/debt'
   autoload :Debit, 'invisible_collector/models/debit'
 
@@ -22,5 +23,6 @@ module InvisibleCollector
   autoload :AlarmResource, 'invisible_collector/resources/alarm_resource'
   autoload :CompanyResource, 'invisible_collector/resources/company_resource'
   autoload :CustomerResource, 'invisible_collector/resources/customer_resource'
+  autoload :GroupResource, 'invisible_collector/resources/group_resource'
   autoload :DebtResource, 'invisible_collector/resources/debt_resource'
 end
