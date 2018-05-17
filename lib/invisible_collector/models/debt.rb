@@ -35,6 +35,7 @@ module InvisibleCollector
       @tax = options[:tax]
       @gross_total = options[:gross_total]
       @currency = options[:currency]
+      @debits = options[:debits]
     end
   end
 end
