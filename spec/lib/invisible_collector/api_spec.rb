@@ -18,6 +18,7 @@ describe InvisibleCollector::API do
       company: InvisibleCollector::CompanyResource,
       customer: InvisibleCollector::CustomerResource,
       debt: InvisibleCollector::DebtResource,
+      group: InvisibleCollector::GroupResource,
       alarm: InvisibleCollector::AlarmResource
     }.each do |key, value|
 
@@ -32,5 +33,4 @@ describe InvisibleCollector::API do
   it "has a version number" do
     expect(InvisibleCollector::VERSION).not_to be nil
   end
-
 end

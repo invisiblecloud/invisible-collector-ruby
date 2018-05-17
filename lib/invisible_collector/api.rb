@@ -38,6 +38,11 @@ module InvisibleCollector
       resources[:debt]
     end
 
+    def group
+      resources[:group] ||= GroupResource.new(connection: connection)
+      resources[:group]
+    end
+
     def resources
       @resources ||= {}
     end
