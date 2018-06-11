@@ -8,28 +8,27 @@ describe InvisibleCollector::DebtResource do
 
   describe '#cancel' do
 
-    {
-      invalid: { code: 400, exception: InvisibleCollector::InvalidRequest, message: 'Invalid JSON' },
-      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized, message: 'Credentials are required to access this resource' },
+    { invalid: { code: 400, exception: InvisibleCollector::InvalidRequest, message: 'Invalid JSON' },
+      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized,
+                      message: 'Credentials are required to access this resource' },
       not_found: { code: 404, exception: InvisibleCollector::NotFound, message: 'Debt not found' },
       conflict: { code: 409, exception: InvisibleCollector::InvalidRequest, message: 'Debt already registered' },
-      unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest, message: 'Unprocessable request' }
-    }.each do |key, attrs|
+      unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest,
+                       message: 'Unprocessable request' } }.each do |key, attrs|
 
       it "fails on #{key} error" do
         fixture = api_fixture("debt/#{key}")
         stub_do_api('/debts/id/cancel', :put).to_return(body: fixture, status: attrs[:code])
-        params = {}
-        expect {
+        expect do
           resource.cancel 'id'
-        }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+        end.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
 
     end
 
     it 'cancels a debt when given an external id' do
       fixture = api_fixture('debt/cancel')
-      parsed  = JSON.load(fixture)
+      parsed  = JSON.parse(fixture)
 
       stub_do_api('/debts/id/cancel', :put).to_return(body: fixture)
       debt = resource.cancel 'id'
@@ -49,7 +48,7 @@ describe InvisibleCollector::DebtResource do
 
     it 'cancels a debt when given a debt object' do
       fixture = api_fixture('debt/cancel')
-      parsed  = JSON.load(fixture)
+      parsed  = JSON.parse(fixture)
 
       debt = InvisibleCollector::Debt.new external_id: 'id'
 

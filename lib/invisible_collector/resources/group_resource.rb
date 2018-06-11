@@ -13,7 +13,7 @@ module InvisibleCollector
 
     def add_customer(group, customer)
       group_id = group.is_a?(Group) ? group.id : group
-      customer_id = customer.is_a?(Customer) ? customer.id : customer
+      customer_id = customer.is_a?(Customer) ? customer.gid : customer
       response = execute_post("groups/#{group_id}/customers/#{customer_id}", {})
       Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end

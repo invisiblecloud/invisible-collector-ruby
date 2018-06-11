@@ -8,7 +8,8 @@ describe InvisibleCollector::GroupResource do
 
   describe '#get' do
 
-    { unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized, message: 'Credentials are required to access this resource' },
+    { unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized,
+                      message: 'Credentials are required to access this resource' },
       not_found: { code: 404, exception: InvisibleCollector::NotFound, message: 'Group not found' }
     }.each do |key, attrs|
 
@@ -16,15 +17,13 @@ describe InvisibleCollector::GroupResource do
         fixture = api_fixture("group/#{key}")
         gid = SecureRandom.uuid
         stub_do_api("/groups/#{gid}", :get).to_return(body: fixture, status: attrs[:code])
-        params = {}
         expect { resource.get!(gid) }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'returns the group info' do
       fixture = api_fixture('group/get')
-      parsed  = JSON.load(fixture)
+      parsed  = JSON.parse(fixture)
 
       stub_do_api('/groups/id').to_return(body: fixture)
       group = resource.get! 'id'

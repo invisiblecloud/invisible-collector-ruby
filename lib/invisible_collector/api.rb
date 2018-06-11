@@ -55,7 +55,7 @@ module InvisibleCollector
         headers: {
           content_type: 'application/json',
           'User-Agent' => "InvisibleCollector Ruby v#{InvisibleCollector::VERSION}",
-          'X-Api-Token' => api_token
+          'Authorization' => "Bearer #{api_token}"
         }
       }
     end
