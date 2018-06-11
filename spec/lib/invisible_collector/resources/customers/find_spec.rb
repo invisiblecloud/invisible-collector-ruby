@@ -23,7 +23,6 @@ describe InvisibleCollector::CustomerResource do
           resource.find()
         }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'returns an empty list' do
@@ -65,7 +64,5 @@ describe InvisibleCollector::CustomerResource do
         expect(customer.external_id).to eq(parsed['externalId'])
       end
     end
-
   end
-
 end

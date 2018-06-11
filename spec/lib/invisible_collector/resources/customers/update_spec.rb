@@ -24,7 +24,6 @@ describe InvisibleCollector::CustomerResource do
           resource.update(customer)
         }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'using a customer hash' do
@@ -70,7 +69,5 @@ describe InvisibleCollector::CustomerResource do
       expect(customer.gid).to eq(parsed['gid'])
       expect(customer.external_id).to eq(parsed['externalId'])
     end
-
   end
-
 end

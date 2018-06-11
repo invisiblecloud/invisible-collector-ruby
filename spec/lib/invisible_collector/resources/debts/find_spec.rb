@@ -17,11 +17,9 @@ describe InvisibleCollector::DebtResource do
       expect(debts).to be_empty
     end
 
-    [
-      {"number" => 234},
-      {number: 3242},
-      {as: '234123', number: '32421'}
-    ].each do |query|
+    [ { 'number' => 234},
+      { number: 3242},
+      { as: '234123', number: '32421' } ].each do |query|
 
       it "returns a debt when using query '#{query}'" do
         fixture = api_fixture('debt/find')

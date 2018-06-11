@@ -36,7 +36,6 @@ describe InvisibleCollector::CustomerResource do
       expect(customer.gid).to eq(parsed['gid'])
       expect(customer.external_id).to eq(parsed['externalId'])
     end
-
   end
 
   describe '#get!' do
@@ -69,7 +68,5 @@ describe InvisibleCollector::CustomerResource do
       expect(customer.gid).to eq(parsed['gid'])
       expect(customer.external_id).to eq(parsed['externalId'])
     end
-
   end
-
 end

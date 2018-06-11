@@ -21,6 +21,5 @@ describe InvisibleCollector::Company do
       expect(company.name).to eq('some name')
       expect(company.address).to eq('some address')
     end
-
   end
 end

@@ -21,6 +21,5 @@ describe InvisibleCollector::Customer do
       expect(customer.name).to eq('some name')
       expect(customer.address).to eq('some address')
     end
-
   end
 end

@@ -9,11 +9,12 @@ describe InvisibleCollector::DebtResource do
   describe '#save_debit' do
 
     { invalid: { code: 400, exception: InvisibleCollector::InvalidRequest, message: 'Invalid JSON' },
-      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized, message: 'Credentials are required to access this resource' },
+      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized,
+                      message: 'Credentials are required to access this resource' },
       not_found: { code: 404, exception: InvisibleCollector::NotFound, message: 'Debt not found' },
       conflict: { code: 409, exception: InvisibleCollector::InvalidRequest, message: 'Debt already registered' },
-      unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest, message: 'Unprocessable request' }
-    }.each do |key, attrs|
+      unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest,
+                       message: 'Unprocessable request' } }.each do |key, attrs|
 
       it "fails on #{key} error" do
         fixture = api_fixture("debt/#{key}")
@@ -22,7 +23,6 @@ describe InvisibleCollector::DebtResource do
         params = {}
         expect { resource.save_debit(gid, params) }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'uses a debit object' do

@@ -23,7 +23,6 @@ describe InvisibleCollector::DebtResource do
           resource.cancel 'id'
         end.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'cancels a debt when given an external id' do
@@ -67,7 +66,5 @@ describe InvisibleCollector::DebtResource do
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
     end
-
   end
-
 end

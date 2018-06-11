@@ -8,23 +8,22 @@ describe InvisibleCollector::DebtResource do
 
   describe '#save' do
 
-    {
-      invalid: { code: 400, exception: InvisibleCollector::InvalidRequest, message: 'Invalid JSON' },
-      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized, message: 'Credentials are required to access this resource' },
+    { invalid: { code: 400, exception: InvisibleCollector::InvalidRequest, message: 'Invalid JSON' },
+      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized,
+                      message: 'Credentials are required to access this resource' },
       not_found: { code: 404, exception: InvisibleCollector::NotFound, message: 'Debt not found' },
       conflict: { code: 409, exception: InvisibleCollector::InvalidRequest, message: 'Debt already registered' },
-      unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest, message: 'Unprocessable request' }
-    }.each do |key, attrs|
+      unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest,
+                       message: 'Unprocessable request' } }.each do |key, attrs|
 
       it "fails on #{key} error" do
         fixture = api_fixture("debt/#{key}")
-        stub_do_api("/debts", :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
+        stub_do_api('/debts', :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
         params = {}
         expect {
           resource.save params
         }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'uses a debt object' do
@@ -69,7 +68,5 @@ describe InvisibleCollector::DebtResource do
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
     end
-
   end
-
 end

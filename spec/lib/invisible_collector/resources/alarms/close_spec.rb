@@ -23,7 +23,6 @@ describe InvisibleCollector::AlarmResource do
           resource.close('something')
         }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     it 'closes an alarm using gid' do
@@ -54,7 +53,5 @@ describe InvisibleCollector::AlarmResource do
       expect(alarm.createdAt).to eq(parsed['createdAt'])
       expect(alarm.updatedAt).to eq(parsed['updatedAt'])
     end
-
   end
-
 end

@@ -23,7 +23,6 @@ describe InvisibleCollector::AlarmResource do
           resource.save_event "something", params
         }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
-
     end
 
     [
@@ -59,9 +58,6 @@ describe InvisibleCollector::AlarmResource do
         expect(event.origin).to eq(parsed['origin'])
         expect(event.destination).to eq(parsed['destination'])
       end
-
     end
-
   end
-
 end

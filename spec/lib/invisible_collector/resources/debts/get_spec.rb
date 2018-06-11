@@ -51,7 +51,5 @@ describe InvisibleCollector::DebtResource do
         expect(actual[:number]).to eq(expected['number'])
       end
     end
-
   end
-
 end

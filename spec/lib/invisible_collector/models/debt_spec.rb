@@ -40,6 +40,5 @@ describe InvisibleCollector::Debt do
       expect(debt.number).to eq('some number')
       expect(debt.external_id).to eq('someId')
     end
-
   end
 end
