@@ -1,6 +1,5 @@
 module InvisibleCollector
   class DebtResource
-
     include InvisibleCollector::DefaultHandlers
 
     def initialize(options = {})
@@ -12,7 +11,7 @@ module InvisibleCollector
     end
 
     def cancel(debt = {})
-      id = debt.kind_of?(InvisibleCollector::Debt) ? debt.external_id : debt
+      id = debt.is_a?(InvisibleCollector::Debt) ? debt.external_id : debt
       response = execute do |connection|
         connection.put("debts/#{id}/cancel")
       end
@@ -43,7 +42,5 @@ module InvisibleCollector
       response = execute_post("debts/#{id}/debits", debit)
       Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
-
   end
-
 end

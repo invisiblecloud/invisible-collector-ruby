@@ -1,23 +1,22 @@
 require 'spec_helper'
 
 describe InvisibleCollector::GroupResource do
-
   let(:client) { InvisibleCollector::API.new(api_token: 'bogus_token') }
   let(:connection) { client.connection }
   let(:resource) { described_class.new(connection: connection) }
 
   describe '#get' do
-
     { unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized,
                       message: 'Credentials are required to access this resource' },
-      not_found: { code: 404, exception: InvisibleCollector::NotFound, message: 'Group not found' }
-    }.each do |key, attrs|
+      not_found: { code: 404, exception: InvisibleCollector::NotFound,
+                   message: 'Group not found' } }.each do |key, attrs|
 
       it "fails on #{key} error" do
         fixture = api_fixture("group/#{key}")
         gid = SecureRandom.uuid
         stub_do_api("/groups/#{gid}", :get).to_return(body: fixture, status: attrs[:code])
-        expect { resource.get!(gid) }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+        expect { resource.get!(gid) }.to(raise_exception(attrs[:exception])
+                                             .with_message("#{attrs[:code]}: #{attrs[:message]}"))
       end
     end
 

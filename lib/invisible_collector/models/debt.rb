@@ -1,5 +1,4 @@
 module InvisibleCollector
-
   class Debt
     include InvisibleCollector::ModelAttributes
 
@@ -19,7 +18,7 @@ module InvisibleCollector
     attr_accessor :attributes
     attr_accessor :debits
 
-    def initialize(options={})
+    def initialize(options = {})
       options = options.with_indifferent_access
       @id = options[:id]
       @number = options[:number]

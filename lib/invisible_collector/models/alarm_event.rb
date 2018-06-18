@@ -8,7 +8,7 @@ module InvisibleCollector
     attr_accessor :destination
     attr_accessor :debts
 
-    def initialize(options={})
+    def initialize(options = {})
       options = options.with_indifferent_access
       @gid = options[:gid]
       @origin = options[:origin]

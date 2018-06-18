@@ -1,6 +1,5 @@
 module InvisibleCollector
   module DefaultHandlers
-
     def initialize(options = {})
       @connection = options[:connection]
       handle(401) { |response| raise InvisibleCollector::Unauthorized.from_json(response.body) }
@@ -8,7 +7,7 @@ module InvisibleCollector
 
     def execute
       response = yield(@connection)
-      if handles.has_key? response.status
+      if handles.key? response.status
         handles[response.status].call response
       end
       response

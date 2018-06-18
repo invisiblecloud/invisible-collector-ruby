@@ -1,6 +1,5 @@
 module InvisibleCollector
   class Unauthorized < RuntimeError
-
     def self.from_json(json)
       message = JSON.parse(json)
       code = message['code']

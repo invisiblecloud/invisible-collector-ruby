@@ -28,27 +28,21 @@ module InvisibleCollector
       response = @connection.get("alarms/#{gid}")
       if response.status == 404
         nil
+      elsif handles.key? response.status
+        handles[response.status].call response
       else
-        if handles.has_key? response.status
-          handles[response.status].call response
-        else
-          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        end
+        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
 
     def get!(gid)
       response = @connection.get("alarms/#{gid}")
-      if response.status == 404
-        raise InvisibleCollector::NotFound.from_json(response.body)
+      raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
+      if handles.key? response.status
+        handles[response.status].call response
       else
-        if handles.has_key? response.status
-          handles[response.status].call response
-        else
-          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        end
+        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
-
   end
 end

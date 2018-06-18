@@ -2,8 +2,8 @@ require 'invisible_collector/version'
 require 'json'
 require 'active_support/all'
 
+# Invisible Collector load module
 module InvisibleCollector
-
   autoload :API, 'invisible_collector/api'
 
   autoload :NotFound, 'invisible_collector/not_found'

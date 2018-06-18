@@ -25,7 +25,7 @@ module InvisibleCollector
 
     def get!(gid)
       response = @connection.get("groups/#{gid}")
-      if handles.has_key? response.status
+      if handles.key? response.status
         handles[response.status].call response
       else
         Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))

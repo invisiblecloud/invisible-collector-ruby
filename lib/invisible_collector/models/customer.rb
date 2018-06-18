@@ -14,7 +14,7 @@ module InvisibleCollector
     attr_accessor :city
     attr_accessor :country
 
-    def initialize(options={})
+    def initialize(options = {})
       options = options.with_indifferent_access
       @name = options[:name]
       @vat_number = options[:vat_number]

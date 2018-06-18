@@ -1,10 +1,8 @@
 require 'faraday'
 
 module InvisibleCollector
-
   class API
-
-    INVISIBLECOLLECTOR_API = 'https://api.invisiblecollector.com'
+    INVISIBLECOLLECTOR_API = 'https://api.invisiblecollector.com'.freeze
 
     attr_reader :api_token
 
@@ -59,7 +57,5 @@ module InvisibleCollector
         }
       }
     end
-
   end
-
 end

@@ -15,18 +15,16 @@ module InvisibleCollector
       response = @connection.get("customers/#{id}/alarm", params)
       if response.status == 404
         nil
+      elsif handles.key? response.status
+        handles[response.status].call response
       else
-        if handles.has_key? response.status
-          handles[response.status].call response
-        else
-          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        end
+        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
 
     def find(params = {})
       response = @connection.get('customers/find', params)
-      if handles.has_key? response.status
+      if handles.key? response.status
         handles[response.status].call response
       else
         JSON.parse(response.body).map { |json| Customer.new(json.deep_transform_keys(&:underscore)) }
@@ -44,11 +42,8 @@ module InvisibleCollector
 
     def get!(id)
       response = @connection.get("customers/#{id}")
-      if response.status == 404
-        raise InvisibleCollector::NotFound.from_json(response.body)
-      else
-        Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-      end
+      raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
+      Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
     def save(customer = {})

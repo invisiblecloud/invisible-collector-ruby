@@ -8,7 +8,7 @@ module InvisibleCollector
     attr_accessor :createdAt
     attr_accessor :updatedAt
 
-    def initialize(options={})
+    def initialize(options = {})
       options = options.with_indifferent_access
       @gid = options[:gid]
       @status = options[:status]

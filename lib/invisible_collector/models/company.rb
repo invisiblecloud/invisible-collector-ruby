@@ -12,7 +12,7 @@ module InvisibleCollector
     attr_accessor :gid
     attr_accessor :notifications_enabled
 
-    def initialize(options={})
+    def initialize(options = {})
       options = options.with_indifferent_access
       @name = options['name']
       @vat_number = options['vat_number']
@@ -23,6 +23,5 @@ module InvisibleCollector
       @gid = options['gid']
       @notifications_enabled = options['notifications_enabled']
     end
-
   end
 end
