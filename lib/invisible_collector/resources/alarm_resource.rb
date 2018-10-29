@@ -1,6 +1,5 @@
 module InvisibleCollector
   class AlarmResource
-
     include InvisibleCollector::DefaultHandlers
 
     def initialize(options = {})

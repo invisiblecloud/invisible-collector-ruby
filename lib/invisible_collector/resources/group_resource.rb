@@ -1,6 +1,5 @@
 module InvisibleCollector
   class GroupResource
-
     include InvisibleCollector::DefaultHandlers
 
     def initialize(options = {})

@@ -1,11 +1,12 @@
 module InvisibleCollector
-
   class AlarmEvent
     include InvisibleCollector::ModelAttributes
 
     attr_accessor :gid
     attr_accessor :origin
     attr_accessor :destination
+    attr_accessor :message
+    attr_accessor :message_type
     attr_accessor :debts
 
     def initialize(options = {})
@@ -13,6 +14,8 @@ module InvisibleCollector
       @gid = options[:gid]
       @origin = options[:origin]
       @destination = options[:destination]
+      @message = options[:message]
+      @message_type = options[:message_type]
       @debts = options[:debts]
     end
   end

@@ -1,5 +1,7 @@
 {
   "gid": "061d2feb-81c2-4694-a74a-1311cbe7d2ce",
   "origin": "potatoes@farm.com",
-  "destination": "onions@farm.com"
+  "destination": "onions@farm.com",
+  "message": "hello world",
+  "messageType": "EMAIL"
 }

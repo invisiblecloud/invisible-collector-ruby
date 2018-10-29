@@ -1,5 +1,4 @@
 module InvisibleCollector
-
   class Alarm
     include InvisibleCollector::ModelAttributes
 

@@ -1,5 +1,4 @@
 module InvisibleCollector
-
   class Company
     include InvisibleCollector::ModelAttributes
 

@@ -1,5 +1,4 @@
 module InvisibleCollector
-
   class Customer
     include InvisibleCollector::ModelAttributes
 

@@ -20,7 +20,7 @@ describe InvisibleCollector::AlarmResource do
         stub_do_api("/alarms/something/events", :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
         params = {}
         expect {
-          resource.save_event "something", params
+          resource.save_event 'something', params
         }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
       end
     end
@@ -43,20 +43,24 @@ describe InvisibleCollector::AlarmResource do
         expect(event.gid).to eq(parsed['gid'])
         expect(event.origin).to eq(parsed['origin'])
         expect(event.destination).to eq(parsed['destination'])
+        expect(event.message).to eq(parsed['message'])
+        expect(event.message_type).to eq(parsed['messageType'])
       end
 
       it 'using an event hash' do
         fixture = api_fixture('alarm/save_event')
         parsed  = JSON.load(fixture)
 
-        stub_do_api("/alarms/something/events", :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
-        event = resource.save_event "something", attrs
+        stub_do_api('/alarms/something/events', :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
+        event = resource.save_event 'something', attrs
 
         expect(event).to be_kind_of(InvisibleCollector::AlarmEvent)
 
         expect(event.gid).to eq(parsed['gid'])
         expect(event.origin).to eq(parsed['origin'])
         expect(event.destination).to eq(parsed['destination'])
+        expect(event.message).to eq(parsed['message'])
+        expect(event.message_type).to eq(parsed['messageType'])
       end
     end
   end

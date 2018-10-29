@@ -1,6 +1,5 @@
 module InvisibleCollector
   class CustomerResource
-
     include InvisibleCollector::DefaultHandlers
 
     def initialize(options = {})

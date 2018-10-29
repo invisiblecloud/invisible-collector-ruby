@@ -6,6 +6,5 @@ module InvisibleCollector
       message = message['message']
       new "#{code}: #{message}"
     end
-
   end
 end

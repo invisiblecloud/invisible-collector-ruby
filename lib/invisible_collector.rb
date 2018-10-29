@@ -18,6 +18,8 @@ module InvisibleCollector
   autoload :Group, 'invisible_collector/models/group'
   autoload :Debt, 'invisible_collector/models/debt'
   autoload :Debit, 'invisible_collector/models/debit'
+  autoload :Credit, 'invisible_collector/models/credit'
+  autoload :Payment, 'invisible_collector/models/payment'
 
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
   autoload :AlarmResource, 'invisible_collector/resources/alarm_resource'
@@ -25,4 +27,5 @@ module InvisibleCollector
   autoload :CustomerResource, 'invisible_collector/resources/customer_resource'
   autoload :GroupResource, 'invisible_collector/resources/group_resource'
   autoload :DebtResource, 'invisible_collector/resources/debt_resource'
+  autoload :PaymentResource, 'invisible_collector/resources/payment_resource'
 end

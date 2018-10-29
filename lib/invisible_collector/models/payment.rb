@@ -1,16 +1,14 @@
 module InvisibleCollector
-  class Debit
+  class Payment
     include InvisibleCollector::ModelAttributes
 
     attr_accessor :number
-    attr_accessor :date
-    attr_accessor :gross_total
+    attr_accessor :external_id
 
     def initialize(options = {})
       options = options.with_indifferent_access
       @number = options[:number]
-      @date = options[:date]
-      @gross_total = options[:gross_total]
+      @external_id = options[:external_id]
     end
   end
 end

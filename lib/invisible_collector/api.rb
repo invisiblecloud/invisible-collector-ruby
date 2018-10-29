@@ -6,8 +6,9 @@ module InvisibleCollector
 
     attr_reader :api_token
 
-    def initialize(option = {})
-      @api_token = option.with_indifferent_access[:api_token]
+    def initialize(options = {})
+      @api_token = options.with_indifferent_access[:api_token]
+      @host = options.with_indifferent_access[:host]
     end
 
     def connection
@@ -16,28 +17,33 @@ module InvisibleCollector
       end
     end
 
-    def alarm
-      resources[:alarm] ||= AlarmResource.new(connection: connection)
+    def alarm(options = {})
+      resources[:alarm] ||= AlarmResource.new({ connection: connection }.merge(options))
       resources[:alarm]
     end
 
-    def company
-      resources[:company] ||= CompanyResource.new(connection: connection)
+    def company(options = {})
+      resources[:company] ||= CompanyResource.new({ connection: connection }.merge(options))
       resources[:company]
     end
 
-    def customer
-      resources[:customer] ||= CustomerResource.new(connection: connection)
+    def customer(options = {})
+      resources[:customer] ||= CustomerResource.new({ connection: connection }.merge(options))
       resources[:customer]
     end
 
-    def debt
-      resources[:debt] ||= DebtResource.new(connection: connection)
+    def debt(options = {})
+      resources[:debt] ||= DebtResource.new({ connection: connection }.merge(options))
       resources[:debt]
     end
 
-    def group
-      resources[:group] ||= GroupResource.new(connection: connection)
+    def payments(options = {})
+      resources[:payment] ||= PaymentResource.new({ connection: connection }.merge(options))
+      resources[:payment]
+    end
+
+    def group(options = {})
+      resources[:group] ||= GroupResource.new({ connection: connection }.merge(options))
       resources[:group]
     end
 
@@ -49,7 +55,7 @@ module InvisibleCollector
 
     def connection_options
       {
-        url: INVISIBLECOLLECTOR_API,
+        url: @host || INVISIBLECOLLECTOR_API,
         headers: {
           content_type: 'application/json',
           'User-Agent' => "InvisibleCollector Ruby v#{InvisibleCollector::VERSION}",

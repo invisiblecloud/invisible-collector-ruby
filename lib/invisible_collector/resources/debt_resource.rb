@@ -42,5 +42,11 @@ module InvisibleCollector
       response = execute_post("debts/#{id}/debits", debit)
       Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
+
+    def save_credit(debt, credit)
+      id = debt.is_a?(Debt) ? debt.id : debt
+      response = execute_post("debts/#{id}/credits", credit)
+      Credit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+    end
   end
 end

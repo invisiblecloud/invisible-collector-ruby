@@ -1,5 +1,4 @@
 module InvisibleCollector
-
   class Group
     include InvisibleCollector::ModelAttributes
 
