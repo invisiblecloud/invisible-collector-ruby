@@ -44,8 +44,8 @@ describe InvisibleCollector::AlarmResource do
 
       expect(alarm.gid).to eq(parsed['gid'])
       expect(alarm.status).to eq(parsed['status'])
-      expect(alarm.createdAt).to eq(parsed['createdAt'])
-      expect(alarm.updatedAt).to eq(parsed['updatedAt'])
+      expect(alarm.created_at).to eq(parsed['createdAt'])
+      expect(alarm.updated_at).to eq(parsed['updatedAt'])
     end
 
   end
@@ -81,8 +81,8 @@ describe InvisibleCollector::AlarmResource do
 
       expect(alarm.gid).to eq(parsed['gid'])
       expect(alarm.status).to eq(parsed['status'])
-      expect(alarm.createdAt).to eq(parsed['createdAt'])
-      expect(alarm.updatedAt).to eq(parsed['updatedAt'])
+      expect(alarm.created_at).to eq(parsed['createdAt'])
+      expect(alarm.updated_at).to eq(parsed['updatedAt'])
     end
   end
 end

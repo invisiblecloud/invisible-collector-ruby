@@ -12,7 +12,7 @@ module InvisibleCollector
     end
 
     def connection
-      @faraday ||= Faraday.new connection_options do |req|
+      @connection ||= Faraday.new connection_options do |req|
         req.adapter :net_http
       end
     end

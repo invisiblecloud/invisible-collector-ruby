@@ -7,9 +7,7 @@ module InvisibleCollector
 
     def execute
       response = yield(@connection)
-      if handles.key? response.status
-        handles[response.status].call response
-      end
+      handles[response.status].call(response) if handles.key?(response.status)
       response
     end
 
