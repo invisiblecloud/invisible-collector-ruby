@@ -37,6 +37,7 @@ module InvisibleCollector
     def get!(gid)
       response = @connection.get("alarms/#{gid}")
       raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
+
       if handles.key? response.status
         handles[response.status].call response
       else

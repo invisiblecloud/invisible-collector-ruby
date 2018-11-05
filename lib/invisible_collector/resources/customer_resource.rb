@@ -42,6 +42,7 @@ module InvisibleCollector
     def get!(id)
       response = @connection.get("customers/#{id}")
       raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
+
       Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
     end
 
