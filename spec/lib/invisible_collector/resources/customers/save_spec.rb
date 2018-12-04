@@ -23,7 +23,7 @@ describe InvisibleCollector::Resources::CustomerResource do
       stub_do_api("/customers", :post).with(body: '{}').to_return(body: fixture)
       customer = resource.save
 
-      expect(customer).to be_kind_of(InvisibleCollector::Customer)
+      expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
@@ -40,12 +40,12 @@ describe InvisibleCollector::Resources::CustomerResource do
     it 'returns the created customer using customer object' do
       fixture = api_fixture('customer/post')
       parsed  = JSON.load(fixture)
-      new_customer = InvisibleCollector::Customer.new parsed
+      new_customer = InvisibleCollector::Model::Customer.new parsed
 
       stub_do_api("/customers", :post).with(body: new_customer.to_json).to_return(body: fixture)
       customer = resource.save(new_customer)
 
-      expect(customer).to be_kind_of(InvisibleCollector::Customer)
+      expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])

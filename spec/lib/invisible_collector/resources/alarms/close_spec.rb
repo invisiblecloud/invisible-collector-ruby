@@ -31,7 +31,7 @@ describe InvisibleCollector::Resources::AlarmResource do
       stub_do_api("/alarms/#{parsed['gid']}/close", :put).with(body: nil).to_return(body: fixture)
       alarm = resource.close(parsed['gid'])
 
-      expect(alarm).to be_kind_of(InvisibleCollector::Alarm)
+      expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])
       expect(alarm.status).to eq('CLOSED')
@@ -42,11 +42,11 @@ describe InvisibleCollector::Resources::AlarmResource do
     it 'closes an alarm using the actual alarm' do
       fixture = api_fixture('alarm/close')
       parsed  = JSON.load(fixture)
-      alarm = InvisibleCollector::Alarm.new gid: parsed['gid']
+      alarm = InvisibleCollector::Model::Alarm.new gid: parsed['gid']
       stub_do_api("/alarms/#{parsed['gid']}/close", :put).with(body: nil).to_return(body: fixture)
       alarm = resource.close(alarm)
 
-      expect(alarm).to be_kind_of(InvisibleCollector::Alarm)
+      expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])
       expect(alarm.status).to eq('CLOSED')

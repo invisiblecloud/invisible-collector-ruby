@@ -34,11 +34,11 @@ describe InvisibleCollector::Resources::AlarmResource do
         fixture = api_fixture('alarm/save_event')
         parsed  = JSON.load(fixture)
 
-        event = InvisibleCollector::AlarmEvent.new(attrs)
+        event = InvisibleCollector::Model::AlarmEvent.new(attrs)
         stub_do_api("/alarms/something/events", :post).with(body: event.to_json).to_return(body: fixture, status: 201)
         event = resource.save_event "something", event
 
-        expect(event).to be_kind_of(InvisibleCollector::AlarmEvent)
+        expect(event).to be_kind_of(InvisibleCollector::Model::AlarmEvent)
 
         expect(event.gid).to eq(parsed['gid'])
         expect(event.origin).to eq(parsed['origin'])
@@ -54,7 +54,7 @@ describe InvisibleCollector::Resources::AlarmResource do
         stub_do_api('/alarms/something/events', :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
         event = resource.save_event 'something', attrs
 
-        expect(event).to be_kind_of(InvisibleCollector::AlarmEvent)
+        expect(event).to be_kind_of(InvisibleCollector::Model::AlarmEvent)
 
         expect(event.gid).to eq(parsed['gid'])
         expect(event.origin).to eq(parsed['origin'])

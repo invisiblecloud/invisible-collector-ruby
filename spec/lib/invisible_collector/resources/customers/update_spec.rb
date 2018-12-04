@@ -30,11 +30,11 @@ describe InvisibleCollector::Resources::CustomerResource do
       fixture = api_fixture('customer/update')
       parsed  = JSON.load(fixture)
 
-      customer = InvisibleCollector::Customer.new
+      customer = InvisibleCollector::Model::Customer.new
       stub_do_api("/customers/#{customer.gid}", :put).with(body: customer.to_json).to_return(body: fixture)
       customer = resource.update customer.to_h
 
-      expect(customer).to be_kind_of(InvisibleCollector::Customer)
+      expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
@@ -52,11 +52,11 @@ describe InvisibleCollector::Resources::CustomerResource do
       fixture = api_fixture('customer/update')
       parsed  = JSON.load(fixture)
 
-      customer = InvisibleCollector::Customer.new
+      customer = InvisibleCollector::Model::Customer.new
       stub_do_api("/customers/#{customer.gid}", :put).with(body: customer.to_json).to_return(body: fixture)
       customer = resource.update customer
 
-      expect(customer).to be_kind_of(InvisibleCollector::Customer)
+      expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])

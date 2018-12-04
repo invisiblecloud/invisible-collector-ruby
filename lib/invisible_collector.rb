@@ -10,17 +10,19 @@ module InvisibleCollector
   autoload :InvalidRequest, 'invisible_collector/invalid_request'
   autoload :Unauthorized, 'invisible_collector/unauthorized'
 
-  autoload :Model, 'invisible_collector/models/model'
-  autoload :ModelAttributes, 'invisible_collector/models/model_attributes'
-  autoload :Alarm, 'invisible_collector/models/alarm'
-  autoload :AlarmEvent, 'invisible_collector/models/alarm_event'
-  autoload :Company, 'invisible_collector/models/company'
-  autoload :Customer, 'invisible_collector/models/customer'
-  autoload :Group, 'invisible_collector/models/group'
-  autoload :Debt, 'invisible_collector/models/debt'
-  autoload :Debit, 'invisible_collector/models/debit'
-  autoload :Credit, 'invisible_collector/models/credit'
-  autoload :Payment, 'invisible_collector/models/payment'
+  module Model
+    autoload :AbstractModel, 'invisible_collector/models/abstract_model'
+    autoload :ModelAttributes, 'invisible_collector/models/model_attributes'
+    autoload :Alarm, 'invisible_collector/models/alarm'
+    autoload :AlarmEvent, 'invisible_collector/models/alarm_event'
+    autoload :Company, 'invisible_collector/models/company'
+    autoload :Customer, 'invisible_collector/models/customer'
+    autoload :Group, 'invisible_collector/models/group'
+    autoload :Debt, 'invisible_collector/models/debt'
+    autoload :Debit, 'invisible_collector/models/debit'
+    autoload :Credit, 'invisible_collector/models/credit'
+    autoload :Payment, 'invisible_collector/models/payment'
+  end
 
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
   module Resources

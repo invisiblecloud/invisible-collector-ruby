@@ -10,7 +10,7 @@ describe InvisibleCollector::Resources::CustomerResource do
 
     it 'returns null if not found' do
       fixture = api_fixture('customer/not_found')
-      stub_do_api("/customers/something").to_return(body: fixture, status: 404)
+      stub_do_api('/customers/something').to_return(body: fixture, status: 404)
       customer = resource.get('something')
 
       expect(customer).to be_nil
@@ -23,7 +23,7 @@ describe InvisibleCollector::Resources::CustomerResource do
       stub_do_api("/customers/#{parsed['gid']}").to_return(body: fixture)
       customer = resource.get(parsed['gid'])
 
-      expect(customer).to be_kind_of(InvisibleCollector::Customer)
+      expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])
@@ -55,7 +55,7 @@ describe InvisibleCollector::Resources::CustomerResource do
       stub_do_api("/customers/#{parsed['gid']}").to_return(body: fixture)
       customer = resource.get!(parsed['gid'])
 
-      expect(customer).to be_kind_of(InvisibleCollector::Customer)
+      expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
       expect(customer.vat_number).to eq(parsed['vatNumber'])

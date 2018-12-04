@@ -27,7 +27,7 @@ describe InvisibleCollector::Resources::GroupResource do
       stub_do_api('/groups/id').to_return(body: fixture)
       group = resource.get! 'id'
 
-      expect(group).to be_kind_of(InvisibleCollector::Group)
+      expect(group).to be_kind_of(InvisibleCollector::Model::Group)
 
       expect(group.id).to eq(parsed['id'])
       expect(group.name).to eq(parsed['name'])

@@ -40,7 +40,7 @@ describe InvisibleCollector::Resources::AlarmResource do
       stub_do_api("/alarms/#{parsed['gid']}").to_return(body: fixture)
       alarm = resource.get(parsed['gid'])
 
-      expect(alarm).to be_kind_of(InvisibleCollector::Alarm)
+      expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])
       expect(alarm.status).to eq(parsed['status'])
@@ -77,7 +77,7 @@ describe InvisibleCollector::Resources::AlarmResource do
       stub_do_api("/alarms/#{parsed['gid']}").to_return(body: fixture)
       alarm = resource.get!(parsed['gid'])
 
-      expect(alarm).to be_kind_of(InvisibleCollector::Alarm)
+      expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])
       expect(alarm.status).to eq(parsed['status'])

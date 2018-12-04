@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe InvisibleCollector::Debt do
+describe InvisibleCollector::Model::Debt do
 
   it 'converts to json' do
     attrs = {
@@ -16,7 +16,7 @@ describe InvisibleCollector::Debt do
       gross_total: 44.5,
       currency: 'EUR'
     }
-    json = InvisibleCollector::Debt.new(attrs).to_json
+    json = InvisibleCollector::Model::Debt.new(attrs).to_json
     expect(json).to include('"number":"some number"')
     expect(json).to include('"externalId":"some external id"')
     expect(json).to include('"type":"SD"')
@@ -30,13 +30,13 @@ describe InvisibleCollector::Debt do
   describe 'creation' do
 
     it 'supports symbol attributes' do
-      debt = InvisibleCollector::Debt.new(number: 'some number', external_id: 'someId')
+      debt = InvisibleCollector::Model::Debt.new(number: 'some number', external_id: 'someId')
       expect(debt.number).to eq('some number')
       expect(debt.external_id).to eq('someId')
     end
 
     it 'supports string attributes' do
-      debt = InvisibleCollector::Debt.new(number: 'some number', external_id: 'someId')
+      debt = InvisibleCollector::Model::Debt.new(number: 'some number', external_id: 'someId')
       expect(debt.number).to eq('some number')
       expect(debt.external_id).to eq('someId')
     end

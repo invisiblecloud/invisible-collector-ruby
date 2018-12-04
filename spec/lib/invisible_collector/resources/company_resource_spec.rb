@@ -15,7 +15,7 @@ describe InvisibleCollector::Resources::CompanyResource do
       stub_do_api('/companies').to_return(body: fixture)
       company = resource.get
 
-      expect(company).to be_kind_of(InvisibleCollector::Company)
+      expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
       expect(company.vat_number).to eq(parsed['vatNumber'])
@@ -35,12 +35,12 @@ describe InvisibleCollector::Resources::CompanyResource do
       fixture = api_fixture('company/update')
       parsed = JSON.load(fixture)
 
-      company = InvisibleCollector::Company.new
+      company = InvisibleCollector::Model::Company.new
       as_json = {}
       stub_do_api('/companies', :put).with(body: as_json).to_return(body: fixture, status: 201)
       company = resource.update company
 
-      expect(company).to be_kind_of(InvisibleCollector::Company)
+      expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
       expect(company.vat_number).to eq(parsed['vatNumber'])
@@ -63,7 +63,7 @@ describe InvisibleCollector::Resources::CompanyResource do
       stub_do_api('/companies/enableNotifications', :put).to_return(body: fixture)
       company = resource.enable_notifications
 
-      expect(company).to be_kind_of(InvisibleCollector::Company)
+      expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
       expect(company.vat_number).to eq(parsed['vatNumber'])
@@ -86,7 +86,7 @@ describe InvisibleCollector::Resources::CompanyResource do
       stub_do_api('/companies/disableNotifications', :put).to_return(body: fixture)
       company = resource.disable_notifications
 
-      expect(company).to be_kind_of(InvisibleCollector::Company)
+      expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
       expect(company.vat_number).to eq(parsed['vatNumber'])

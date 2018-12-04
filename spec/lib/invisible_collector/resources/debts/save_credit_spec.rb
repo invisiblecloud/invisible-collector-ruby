@@ -31,11 +31,11 @@ describe InvisibleCollector::Resources::DebtResource do
 
       attrs = { number: 'sdfsad', date: Date.today, gross_total: 50.0 }
       gid = SecureRandom.uuid
-      credit = InvisibleCollector::Credit.new(attrs)
+      credit = InvisibleCollector::Model::Credit.new(attrs)
       stub_do_api("/debts/#{gid}/credits", :post).with(body: credit.to_json).to_return(body: fixture)
       credit = resource.save_credit(gid, credit)
 
-      expect(credit).to be_kind_of(InvisibleCollector::Credit)
+      expect(credit).to be_kind_of(InvisibleCollector::Model::Credit)
 
       expect(credit.number).to eq(parsed['number'])
       expect(credit.description).to eq(parsed['description'])
@@ -49,12 +49,12 @@ describe InvisibleCollector::Resources::DebtResource do
 
       attrs = { number: 'sdfsad', description: 'sdfsdafds', date: Date.today, gross_total: 50.0 }
       gid = SecureRandom.uuid
-      debt = InvisibleCollector::Debt.new(id: gid)
-      credit = InvisibleCollector::Credit.new(attrs)
+      debt = InvisibleCollector::Model::Debt.new(id: gid)
+      credit = InvisibleCollector::Model::Credit.new(attrs)
       stub_do_api("/debts/#{gid}/credits", :post).with(body: credit.to_json).to_return(body: fixture)
       credit = resource.save_credit(debt, credit)
 
-      expect(credit).to be_kind_of(InvisibleCollector::Credit)
+      expect(credit).to be_kind_of(InvisibleCollector::Model::Credit)
 
       expect(credit.number).to eq(parsed['number'])
       expect(credit.date).to eq(parsed['date'])
@@ -70,7 +70,7 @@ describe InvisibleCollector::Resources::DebtResource do
       stub_do_api("/debts/#{gid}/credits", :post).with(body: attrs.to_json).to_return(body: fixture)
       credit = resource.save_credit(gid, attrs.to_json)
 
-      expect(credit).to be_kind_of(InvisibleCollector::Credit)
+      expect(credit).to be_kind_of(InvisibleCollector::Model::Credit)
 
       expect(credit.number).to eq(parsed['number'])
       expect(credit.date).to eq(parsed['date'])

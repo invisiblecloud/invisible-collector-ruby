@@ -15,7 +15,7 @@ describe InvisibleCollector::Resources::DebtResource do
       stub_do_api('/debts/id').to_return(body: fixture)
       debt = resource.get 'id'
 
-      expect(debt).to be_kind_of(InvisibleCollector::Debt)
+      expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
       expect(debt.external_id).to eq(parsed['externalId'])
@@ -35,7 +35,7 @@ describe InvisibleCollector::Resources::DebtResource do
       stub_do_api('/debts/id').to_return(body: fixture)
       debt = resource.get 'id'
 
-      expect(debt).to be_kind_of(InvisibleCollector::Debt)
+      expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
       expect(debt.external_id).to eq(parsed['externalId'])

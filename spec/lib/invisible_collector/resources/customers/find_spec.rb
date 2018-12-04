@@ -50,7 +50,7 @@ describe InvisibleCollector::Resources::CustomerResource do
         expect(customers.size).to eq(1)
 
         customer = customers.first
-        expect(customer).to be_kind_of(InvisibleCollector::Customer)
+        expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
         expect(customer.name).to eq(parsed['name'])
         expect(customer.vat_number).to eq(parsed['vatNumber'])

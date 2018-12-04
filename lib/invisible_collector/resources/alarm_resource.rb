@@ -11,17 +11,17 @@ module InvisibleCollector
       end
 
       def close(alarm)
-        gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
+        gid = alarm.is_a?(Model::Alarm) ? alarm.gid : alarm
         response = execute do |connection|
           connection.put("alarms/#{gid}/close", nil)
         end
-        Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
 
       def save_event(alarm, event)
-        gid = alarm.is_a?(Alarm) ? alarm.gid : alarm
+        gid = alarm.is_a?(Model::Alarm) ? alarm.gid : alarm
         response = execute_post("alarms/#{gid}/events", event)
-        AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Model::AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
 
       def get(gid)
@@ -31,7 +31,7 @@ module InvisibleCollector
         elsif handles.key? response.status
           handles[response.status].call response
         else
-          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         end
       end
 
@@ -42,7 +42,7 @@ module InvisibleCollector
         if handles.key? response.status
           handles[response.status].call response
         else
-          Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         end
       end
     end

@@ -12,16 +12,16 @@ module InvisibleCollector
       end
 
       def cancel(debt = {})
-        id = debt.is_a?(InvisibleCollector::Debt) ? debt.external_id : debt
+        id = debt.is_a?(InvisibleCollector::Model::Debt) ? debt.external_id : debt
         response = execute do |connection|
           connection.put("debts/#{id}/cancel")
         end
-        Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
 
       def find(params = {})
         response = execute_get('debts/find', params)
-        JSON.parse(response.body).map { |json| Debt.new(json.deep_transform_keys(&:underscore)) }
+        JSON.parse(response.body).map { |json| Model::Debt.new(json.deep_transform_keys(&:underscore)) }
       end
 
       def get(id, attrs = {})
@@ -29,25 +29,25 @@ module InvisibleCollector
         if response.status == 404
           nil
         else
-          Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         end
       end
 
       def save(debt)
         response = execute_post('debts', debt)
-        Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
 
       def save_debit(debt, debit)
-        id = debt.is_a?(Debt) ? debt.id : debt
+        id = debt.is_a?(Model::Debt) ? debt.id : debt
         response = execute_post("debts/#{id}/debits", debit)
-        Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Model::Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
 
       def save_credit(debt, credit)
-        id = debt.is_a?(Debt) ? debt.id : debt
+        id = debt.is_a?(Model::Debt) ? debt.id : debt
         response = execute_post("debts/#{id}/credits", credit)
-        Credit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Model::Credit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
       end
     end
   end

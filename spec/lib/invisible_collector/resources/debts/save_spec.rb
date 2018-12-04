@@ -31,11 +31,11 @@ describe InvisibleCollector::Resources::DebtResource do
       parsed  = JSON.load(fixture)
 
       attrs = { number: 'sdfsad', external_id: 'sfsdfsad', type: 'SD', status: 'PENDING' }
-      debt = InvisibleCollector::Debt.new(attrs)
+      debt = InvisibleCollector::Model::Debt.new(attrs)
       stub_do_api('/debts', :post).with(body: debt.to_json).to_return(body: fixture)
       debt = resource.save debt
 
-      expect(debt).to be_kind_of(InvisibleCollector::Debt)
+      expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
       expect(debt.external_id).to eq(parsed['externalId'])
@@ -56,7 +56,7 @@ describe InvisibleCollector::Resources::DebtResource do
       stub_do_api('/debts', :post).with(body: attrs.to_json).to_return(body: fixture)
       debt = resource.save attrs
 
-      expect(debt).to be_kind_of(InvisibleCollector::Debt)
+      expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
       expect(debt.external_id).to eq(parsed['externalId'])
