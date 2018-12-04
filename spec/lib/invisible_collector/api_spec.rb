@@ -19,7 +19,8 @@ describe InvisibleCollector::API do
       customer: InvisibleCollector::CustomerResource,
       debt: InvisibleCollector::DebtResource,
       group: InvisibleCollector::GroupResource,
-      alarm: InvisibleCollector::AlarmResource
+      payment: InvisibleCollector::PaymentResource,
+      alarm: InvisibleCollector::Resources::AlarmResource
     }.each do |key, value|
 
       it "supports #{key} requests" do

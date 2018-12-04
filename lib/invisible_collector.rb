@@ -23,7 +23,9 @@ module InvisibleCollector
   autoload :Payment, 'invisible_collector/models/payment'
 
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
-  autoload :AlarmResource, 'invisible_collector/resources/alarm_resource'
+  module Resources
+    autoload :AlarmResource, 'invisible_collector/resources/alarm_resource'
+  end
   autoload :CompanyResource, 'invisible_collector/resources/company_resource'
   autoload :CustomerResource, 'invisible_collector/resources/customer_resource'
   autoload :GroupResource, 'invisible_collector/resources/group_resource'

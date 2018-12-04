@@ -18,7 +18,7 @@ module InvisibleCollector
     end
 
     def alarm(options = {})
-      resources[:alarm] ||= AlarmResource.new({ connection: connection }.merge(options))
+      resources[:alarm] ||= Resources::AlarmResource.new({ connection: connection }.merge(options))
       resources[:alarm]
     end
 
@@ -37,7 +37,7 @@ module InvisibleCollector
       resources[:debt]
     end
 
-    def payments(options = {})
+    def payment(options = {})
       resources[:payment] ||= PaymentResource.new({ connection: connection }.merge(options))
       resources[:payment]
     end

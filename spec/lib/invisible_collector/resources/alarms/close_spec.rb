@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe InvisibleCollector::AlarmResource do
+describe InvisibleCollector::Resources::AlarmResource do
 
   let(:client) { InvisibleCollector::API.new(api_token: 'bogus_token') }
   let(:connection) { client.connection }
