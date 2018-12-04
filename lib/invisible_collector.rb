@@ -25,10 +25,10 @@ module InvisibleCollector
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
   module Resources
     autoload :AlarmResource, 'invisible_collector/resources/alarm_resource'
+    autoload :CompanyResource, 'invisible_collector/resources/company_resource'
+    autoload :CustomerResource, 'invisible_collector/resources/customer_resource'
+    autoload :GroupResource, 'invisible_collector/resources/group_resource'
+    autoload :DebtResource, 'invisible_collector/resources/debt_resource'
+    autoload :PaymentResource, 'invisible_collector/resources/payment_resource'
   end
-  autoload :CompanyResource, 'invisible_collector/resources/company_resource'
-  autoload :CustomerResource, 'invisible_collector/resources/customer_resource'
-  autoload :GroupResource, 'invisible_collector/resources/group_resource'
-  autoload :DebtResource, 'invisible_collector/resources/debt_resource'
-  autoload :PaymentResource, 'invisible_collector/resources/payment_resource'
 end

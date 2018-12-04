@@ -23,27 +23,27 @@ module InvisibleCollector
     end
 
     def company(options = {})
-      resources[:company] ||= CompanyResource.new({ connection: connection }.merge(options))
+      resources[:company] ||= Resources::CompanyResource.new({ connection: connection }.merge(options))
       resources[:company]
     end
 
     def customer(options = {})
-      resources[:customer] ||= CustomerResource.new({ connection: connection }.merge(options))
+      resources[:customer] ||= Resources::CustomerResource.new({ connection: connection }.merge(options))
       resources[:customer]
     end
 
     def debt(options = {})
-      resources[:debt] ||= DebtResource.new({ connection: connection }.merge(options))
+      resources[:debt] ||= Resources::DebtResource.new({ connection: connection }.merge(options))
       resources[:debt]
     end
 
     def payment(options = {})
-      resources[:payment] ||= PaymentResource.new({ connection: connection }.merge(options))
+      resources[:payment] ||= Resources::PaymentResource.new({ connection: connection }.merge(options))
       resources[:payment]
     end
 
     def group(options = {})
-      resources[:group] ||= GroupResource.new({ connection: connection }.merge(options))
+      resources[:group] ||= Resources::GroupResource.new({ connection: connection }.merge(options))
       resources[:group]
     end
 

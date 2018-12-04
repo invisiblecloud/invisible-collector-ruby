@@ -15,11 +15,11 @@ describe InvisibleCollector::API do
   describe '#resources' do
 
     {
-      company: InvisibleCollector::CompanyResource,
-      customer: InvisibleCollector::CustomerResource,
-      debt: InvisibleCollector::DebtResource,
-      group: InvisibleCollector::GroupResource,
-      payment: InvisibleCollector::PaymentResource,
+      company: InvisibleCollector::Resources::CompanyResource,
+      customer: InvisibleCollector::Resources::CustomerResource,
+      debt: InvisibleCollector::Resources::DebtResource,
+      group: InvisibleCollector::Resources::GroupResource,
+      payment: InvisibleCollector::Resources::PaymentResource,
       alarm: InvisibleCollector::Resources::AlarmResource
     }.each do |key, value|
 

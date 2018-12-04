@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe InvisibleCollector::DebtResource do
+describe InvisibleCollector::Resources::DebtResource do
 
   let(:client) { InvisibleCollector::API.new(api_token: 'bogus_token') }
   let(:connection) { client.connection }
