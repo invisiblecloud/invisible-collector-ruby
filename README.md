@@ -62,6 +62,19 @@ Actions supported:
 * `client.customer.get(:id)`
 * `client.customer.update(:attribute_hash)`
 
+### Debt resource
+
+```ruby
+client = InvisibleCollector::API.new(api_token: 'YOUR_TOKEN')
+client.debt #=> InvisibleCollector::DebtResource
+```
+
+Actions supported:
+
+* `client.debt.find(:attribute_hash)`
+* `client.debt.get(:id)`
+* `client.debt.save(:attribute_hash)`
+
 ### Alarm resource
 
 ```ruby
