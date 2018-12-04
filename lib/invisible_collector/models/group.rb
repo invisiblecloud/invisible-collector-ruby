@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Group
-    include InvisibleCollector::ModelAttributes
-
+  class Group < Model
     attr_accessor :id
     attr_accessor :name
 

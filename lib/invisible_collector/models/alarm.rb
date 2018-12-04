@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Alarm
-    include InvisibleCollector::ModelAttributes
-
+  class Alarm < Model
     attr_accessor :gid
     attr_accessor :status
     attr_accessor :created_at

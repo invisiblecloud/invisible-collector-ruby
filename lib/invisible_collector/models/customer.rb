@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Customer
-    include InvisibleCollector::ModelAttributes
-
+  class Customer < Model
     attr_accessor :name
     attr_accessor :vat_number
     attr_accessor :gid

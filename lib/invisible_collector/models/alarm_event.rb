@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class AlarmEvent
-    include InvisibleCollector::ModelAttributes
-
+  class AlarmEvent < Model
     attr_accessor :gid
     attr_accessor :origin
     attr_accessor :destination

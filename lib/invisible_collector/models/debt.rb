@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Debt
-    include InvisibleCollector::ModelAttributes
-
+  class Debt < Model
     attr_accessor :id
     attr_accessor :number
     attr_accessor :external_id

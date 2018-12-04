@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Company
-    include InvisibleCollector::ModelAttributes
-
+  class Company < Model
     attr_accessor :name
     attr_accessor :vat_number
     attr_accessor :address

@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Credit
-    include InvisibleCollector::ModelAttributes
-
+  class Credit < Model
     attr_accessor :number
     attr_accessor :description
     attr_accessor :date

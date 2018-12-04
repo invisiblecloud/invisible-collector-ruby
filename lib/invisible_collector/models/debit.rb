@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Debit
-    include InvisibleCollector::ModelAttributes
-
+  class Debit < Model
     attr_accessor :number
     attr_accessor :date
     attr_accessor :gross_total

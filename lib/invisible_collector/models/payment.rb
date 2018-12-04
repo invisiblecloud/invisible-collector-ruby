@@ -1,7 +1,5 @@
 module InvisibleCollector
-  class Payment
-    include InvisibleCollector::ModelAttributes
-
+  class Payment < Model
     attr_accessor :number
     attr_accessor :external_id
 

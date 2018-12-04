@@ -10,6 +10,7 @@ module InvisibleCollector
   autoload :InvalidRequest, 'invisible_collector/invalid_request'
   autoload :Unauthorized, 'invisible_collector/unauthorized'
 
+  autoload :Model, 'invisible_collector/models/model'
   autoload :ModelAttributes, 'invisible_collector/models/model_attributes'
   autoload :Alarm, 'invisible_collector/models/alarm'
   autoload :AlarmEvent, 'invisible_collector/models/alarm_event'
