@@ -8,25 +8,24 @@ module InvisibleCollector
       end
 
       def get
-        response = @connection.get('companies')
-        company = Model::Company.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, company)
+        build_response(@connection.get('companies'))
       end
 
       def update(company)
-        response = @connection.put('companies', company)
-        company = Model::Company.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, company)
+        build_response(@connection.put('companies', company))
       end
 
       def enable_notifications
-        response = @connection.put('/companies/enableNotifications')
-        company = Model::Company.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, company)
+        build_response(@connection.put('/companies/enableNotifications'))
       end
 
       def disable_notifications
-        response = @connection.put('/companies/disableNotifications')
+        build_response(@connection.put('/companies/disableNotifications'))
+      end
+
+      private
+
+      def build_response(response)
         company = Model::Company.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         Response.new(response, company)
       end

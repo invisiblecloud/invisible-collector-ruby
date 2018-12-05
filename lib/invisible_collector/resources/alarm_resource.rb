@@ -15,8 +15,7 @@ module InvisibleCollector
         response = execute do |connection|
           connection.put("alarms/#{gid}/close", nil)
         end
-        alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, alarm)
+        build_response(response)
       end
 
       def save_event(alarm, event)
@@ -33,8 +32,7 @@ module InvisibleCollector
         elsif handles.key? response.status
           handles[response.status].call response
         else
-          alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-          Response.new(response, alarm)
+          build_response(response)
         end
       end
 
@@ -45,9 +43,15 @@ module InvisibleCollector
         if handles.key? response.status
           handles[response.status].call response
         else
-          alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-          Response.new(response, alarm)
+          build_response(response)
         end
+      end
+
+      private
+
+      def build_response(response)
+        alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, alarm)
       end
     end
   end

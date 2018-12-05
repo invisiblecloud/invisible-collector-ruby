@@ -38,8 +38,7 @@ module InvisibleCollector
         if response.status == 404
           nil
         else
-          customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-          Response.new(response, customer)
+          build_response(response)
         end
       end
 
@@ -47,14 +46,12 @@ module InvisibleCollector
         response = @connection.get("customers/#{id}")
         raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
 
-        customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, customer)
+        build_response(response)
       end
 
       def save(customer = {})
         response = execute_post('/customers', customer)
-        customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, customer)
+        build_response(response)
       end
 
       def update(customer = {})
@@ -66,6 +63,12 @@ module InvisibleCollector
             req.body = body.to_json
           end
         end
+        build_response(response)
+      end
+
+      private
+
+      def build_response(response)
         customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         Response.new(response, customer)
       end

@@ -16,8 +16,7 @@ module InvisibleCollector
         response = execute do |connection|
           connection.put("debts/#{id}/cancel")
         end
-        debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, debt)
+        build_response(response)
       end
 
       def find(params = {})
@@ -31,15 +30,13 @@ module InvisibleCollector
         if response.status == 404
           nil
         else
-          debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-          Response.new(response, debt)
+          build_response(response)
         end
       end
 
       def save(debt)
         response = execute_post('debts', debt)
-        debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
-        Response.new(response, debt)
+        build_response(response)
       end
 
       def save_debit(debt, debit)
@@ -54,6 +51,13 @@ module InvisibleCollector
         response = execute_post("debts/#{id}/credits", credit)
         credit = Model::Credit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         Response.new(response, credit)
+      end
+
+      private
+
+      def build_response(response)
+        debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, debt)
       end
     end
   end
