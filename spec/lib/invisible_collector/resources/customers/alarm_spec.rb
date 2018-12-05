@@ -28,8 +28,10 @@ describe InvisibleCollector::Resources::CustomerResource do
     it 'returns null if not found' do
       fixture = api_fixture('customer/alarm')
       stub_do_api('/customers/something/alarm').to_return(body: fixture, status: 404)
-      alarm = resource.alarm('something')
+      response = resource.alarm('something')
+      expect(response).to be_error
 
+      alarm = response.content
       expect(alarm).to be_nil
     end
 
@@ -38,8 +40,10 @@ describe InvisibleCollector::Resources::CustomerResource do
       parsed  = JSON.load(fixture)
 
       stub_do_api('/customers/something/alarm').to_return(body: fixture)
-      alarm = resource.alarm('something')
+      response = resource.alarm('something')
+      expect(response).to be_success
 
+      alarm = response.content
       expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])

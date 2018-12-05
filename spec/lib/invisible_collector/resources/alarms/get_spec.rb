@@ -28,8 +28,11 @@ describe InvisibleCollector::Resources::AlarmResource do
     it 'returns null if not found' do
       fixture = api_fixture('alarm/not_found')
       stub_do_api("/alarms/something").to_return(body: fixture, status: 404)
-      alarm = resource.get('something')
+      response = resource.get('something')
+      expect(response).to be_error
+      expect(response.presence).to be_nil
 
+      alarm = response.content
       expect(alarm).to be_nil
     end
 
@@ -38,8 +41,10 @@ describe InvisibleCollector::Resources::AlarmResource do
       parsed  = JSON.load(fixture)
 
       stub_do_api("/alarms/#{parsed['gid']}").to_return(body: fixture)
-      alarm = resource.get(parsed['gid'])
+      response = resource.get(parsed['gid'])
+      expect(response).to be_success
 
+      alarm = response.content
       expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])
@@ -75,8 +80,10 @@ describe InvisibleCollector::Resources::AlarmResource do
       parsed  = JSON.load(fixture)
 
       stub_do_api("/alarms/#{parsed['gid']}").to_return(body: fixture)
-      alarm = resource.get!(parsed['gid'])
+      response = resource.get!(parsed['gid'])
+      expect(response).to be_success
 
+      alarm = response.content
       expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])

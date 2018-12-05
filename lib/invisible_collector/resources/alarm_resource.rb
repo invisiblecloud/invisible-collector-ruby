@@ -15,23 +15,26 @@ module InvisibleCollector
         response = execute do |connection|
           connection.put("alarms/#{gid}/close", nil)
         end
-        Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, alarm)
       end
 
       def save_event(alarm, event)
         gid = alarm.is_a?(Model::Alarm) ? alarm.gid : alarm
         response = execute_post("alarms/#{gid}/events", event)
-        Model::AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        alarm = Model::AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, alarm)
       end
 
       def get(gid)
         response = @connection.get("alarms/#{gid}")
         if response.status == 404
-          nil
+          Response.new(response, nil)
         elsif handles.key? response.status
           handles[response.status].call response
         else
-          Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Response.new(response, alarm)
         end
       end
 
@@ -42,7 +45,8 @@ module InvisibleCollector
         if handles.key? response.status
           handles[response.status].call response
         else
-          Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Response.new(response, alarm)
         end
       end
     end

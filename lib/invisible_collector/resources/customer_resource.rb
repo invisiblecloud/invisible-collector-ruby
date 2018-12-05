@@ -14,11 +14,12 @@ module InvisibleCollector
         id = customer.is_a?(Model::Customer) ? customer.gid : customer
         response = @connection.get("customers/#{id}/alarm", params)
         if response.status == 404
-          nil
+          Response.new(response, nil)
         elsif handles.key? response.status
           handles[response.status].call response
         else
-          Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          alarm = Model::Alarm.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Response.new(response, alarm)
         end
       end
 
@@ -27,7 +28,8 @@ module InvisibleCollector
         if handles.key? response.status
           handles[response.status].call response
         else
-          JSON.parse(response.body).map { |json| Model::Customer.new(json.deep_transform_keys(&:underscore)) }
+          customer = JSON.parse(response.body).map { |j| Model::Customer.new(j.deep_transform_keys(&:underscore)) }
+          Response.new(response, customer)
         end
       end
 
@@ -36,7 +38,8 @@ module InvisibleCollector
         if response.status == 404
           nil
         else
-          Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Response.new(response, customer)
         end
       end
 
@@ -44,12 +47,14 @@ module InvisibleCollector
         response = @connection.get("customers/#{id}")
         raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
 
-        Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, customer)
       end
 
       def save(customer = {})
         response = execute_post('/customers', customer)
-        Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, customer)
       end
 
       def update(customer = {})
@@ -61,7 +66,8 @@ module InvisibleCollector
             req.body = body.to_json
           end
         end
-        Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        customer = Model::Customer.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, customer)
       end
     end
   end

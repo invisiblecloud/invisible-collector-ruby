@@ -13,7 +13,8 @@ module InvisibleCollector
 
       def save(payment)
         response = execute_post('payments', payment)
-        Model::Payment.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        payment = Model::Payment.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, payment)
       end
     end
   end

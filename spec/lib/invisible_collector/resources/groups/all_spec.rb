@@ -29,7 +29,9 @@ describe InvisibleCollector::Resources::GroupResource do
     it 'returns an empty list' do
       fixture = api_fixture('group/all_empty')
       stub_do_api('/groups').to_return(body: fixture)
-      groups = resource.all
+      response = resource.all
+      expect(response).to be_success
+      groups = response.content
 
       expect(groups).to be_kind_of(Array)
       expect(groups).to be_empty

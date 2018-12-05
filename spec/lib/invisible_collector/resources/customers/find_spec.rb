@@ -28,8 +28,10 @@ describe InvisibleCollector::Resources::CustomerResource do
     it 'returns an empty list' do
       fixture = api_fixture('customer/find_empty')
       stub_do_api("/customers/find").to_return(body: fixture)
-      customers = resource.find()
+      response = resource.find()
+      expect(response).to be_success
 
+      customers = response.content
       expect(customers).to be_kind_of(Array)
       expect(customers).to be_empty
     end
@@ -44,8 +46,10 @@ describe InvisibleCollector::Resources::CustomerResource do
         fixture = api_fixture('customer/find')
         parsed  = JSON.load(fixture).first
         stub_do_api("/customers/find?#{URI.encode_www_form(query)}").to_return(body: fixture)
-        customers = resource.find query
+        response = resource.find query
+        expect(response).to be_success
 
+        customers = response.content
         expect(customers).to be_kind_of(Array)
         expect(customers.size).to eq(1)
 

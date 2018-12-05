@@ -5,6 +5,7 @@ require 'active_support/all'
 # Invisible Collector load module
 module InvisibleCollector
   autoload :API, 'invisible_collector/api'
+  autoload :Response, 'invisible_collector/response'
 
   autoload :NotFound, 'invisible_collector/not_found'
   autoload :InvalidRequest, 'invisible_collector/invalid_request'

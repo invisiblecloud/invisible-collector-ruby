@@ -13,8 +13,10 @@ describe InvisibleCollector::Resources::DebtResource do
       parsed  = JSON.load(fixture)
 
       stub_do_api('/debts/id').to_return(body: fixture)
-      debt = resource.get 'id'
+      response = resource.get 'id'
+      expect(response).to be_success
 
+      debt = response.content
       expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
@@ -33,8 +35,10 @@ describe InvisibleCollector::Resources::DebtResource do
       parsed  = JSON.load(fixture)
 
       stub_do_api('/debts/id').to_return(body: fixture)
-      debt = resource.get 'id'
+      response = resource.get 'id'
+      expect(response).to be_success
 
+      debt = response.content
       expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])

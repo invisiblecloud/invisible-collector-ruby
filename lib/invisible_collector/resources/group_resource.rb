@@ -15,12 +15,14 @@ module InvisibleCollector
         group_id = group.is_a?(Model::Group) ? group.id : group
         customer_id = customer.is_a?(Model::Customer) ? customer.gid : customer
         response = execute_post("groups/#{group_id}/customers/#{customer_id}", {})
-        Model::Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        group = Model::Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, group)
       end
 
       def all(params = {})
         response = execute_get('groups', params)
-        JSON.parse(response.body).map { |json| Model::Group.new(json.deep_transform_keys(&:underscore)) }
+        groups = JSON.parse(response.body).map { |json| Model::Group.new(json.deep_transform_keys(&:underscore)) }
+        Response.new(response, groups)
       end
 
       def get!(gid)
@@ -28,13 +30,15 @@ module InvisibleCollector
         if handles.key? response.status
           handles[response.status].call response
         else
-          Model::Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          group = Model::Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Response.new(response, group)
         end
       end
 
       def save(group)
         response = execute_post('groups', group)
-        Model::Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        group = Model::Group.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, group)
       end
     end
   end

@@ -25,8 +25,10 @@ describe InvisibleCollector::Resources::GroupResource do
       parsed  = JSON.parse(fixture)
 
       stub_do_api('/groups/id').to_return(body: fixture)
-      group = resource.get! 'id'
+      response = resource.get! 'id'
+      expect(response).to be_success
 
+      group = response.content
       expect(group).to be_kind_of(InvisibleCollector::Model::Group)
 
       expect(group.id).to eq(parsed['id'])

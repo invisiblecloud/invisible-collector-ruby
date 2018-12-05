@@ -32,8 +32,10 @@ describe InvisibleCollector::Resources::CustomerResource do
 
       customer = InvisibleCollector::Model::Customer.new
       stub_do_api("/customers/#{customer.gid}", :put).with(body: customer.to_json).to_return(body: fixture)
-      customer = resource.update customer.to_h
+      response = resource.update customer.to_h
+      expect(response).to be_success
 
+      customer = response.content
       expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])
@@ -54,8 +56,10 @@ describe InvisibleCollector::Resources::CustomerResource do
 
       customer = InvisibleCollector::Model::Customer.new
       stub_do_api("/customers/#{customer.gid}", :put).with(body: customer.to_json).to_return(body: fixture)
-      customer = resource.update customer
+      response = resource.update customer
+      expect(response).to be_success
 
+      customer = response.content
       expect(customer).to be_kind_of(InvisibleCollector::Model::Customer)
 
       expect(customer.name).to eq(parsed['name'])

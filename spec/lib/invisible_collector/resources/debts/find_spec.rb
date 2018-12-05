@@ -11,22 +11,27 @@ describe InvisibleCollector::Resources::DebtResource do
     it 'returns an empty list' do
       fixture = api_fixture('debt/find_empty')
       stub_do_api("/debts/find").to_return(body: fixture)
-      debts = resource.find()
+      response = resource.find()
+      expect(response).to be_success
 
+      debts = response.content
       expect(debts).to be_kind_of(Array)
       expect(debts).to be_empty
     end
 
     [ { 'number' => 234},
       { number: 3242},
-      { as: '234123', number: '32421' } ].each do |query|
+      { as: '234123', number: '32421' },
+      { from_date: 'dsfasdf', to_date: 'dsfasdfsd' } ].each do |query|
 
       it "returns a debt when using query '#{query}'" do
         fixture = api_fixture('debt/find')
         parsed  = JSON.load(fixture).first
         stub_do_api("/debts/find?#{URI.encode_www_form(query)}").to_return(body: fixture)
-        debts = resource.find query
+        response = resource.find query
+        expect(response).to be_success
 
+        debts = response.content
         expect(debts).to be_kind_of(Array)
         expect(debts.size).to eq(1)
 

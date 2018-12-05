@@ -33,8 +33,10 @@ describe InvisibleCollector::Resources::DebtResource do
       gid = SecureRandom.uuid
       credit = InvisibleCollector::Model::Credit.new(attrs)
       stub_do_api("/debts/#{gid}/credits", :post).with(body: credit.to_json).to_return(body: fixture)
-      credit = resource.save_credit(gid, credit)
+      response = resource.save_credit(gid, credit)
+      expect(response).to be_success
 
+      credit = response.content
       expect(credit).to be_kind_of(InvisibleCollector::Model::Credit)
 
       expect(credit.number).to eq(parsed['number'])
@@ -52,8 +54,10 @@ describe InvisibleCollector::Resources::DebtResource do
       debt = InvisibleCollector::Model::Debt.new(id: gid)
       credit = InvisibleCollector::Model::Credit.new(attrs)
       stub_do_api("/debts/#{gid}/credits", :post).with(body: credit.to_json).to_return(body: fixture)
-      credit = resource.save_credit(debt, credit)
+      response = resource.save_credit(debt, credit)
+      expect(response).to be_success
 
+      credit = response.content
       expect(credit).to be_kind_of(InvisibleCollector::Model::Credit)
 
       expect(credit.number).to eq(parsed['number'])
@@ -68,8 +72,10 @@ describe InvisibleCollector::Resources::DebtResource do
       attrs = { number: 'sdfsad', date: Date.today, gross_total: 50.0 }
       gid = SecureRandom.uuid
       stub_do_api("/debts/#{gid}/credits", :post).with(body: attrs.to_json).to_return(body: fixture)
-      credit = resource.save_credit(gid, attrs.to_json)
+      response = resource.save_credit(gid, attrs.to_json)
+      expect(response).to be_success
 
+      credit = response.content
       expect(credit).to be_kind_of(InvisibleCollector::Model::Credit)
 
       expect(credit.number).to eq(parsed['number'])

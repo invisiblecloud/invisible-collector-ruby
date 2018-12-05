@@ -33,8 +33,10 @@ describe InvisibleCollector::Resources::DebtResource do
       gid = SecureRandom.uuid
       debit = InvisibleCollector::Model::Debit.new(attrs)
       stub_do_api("/debts/#{gid}/debits", :post).with(body: debit.to_json).to_return(body: fixture)
-      debit = resource.save_debit(gid, debit)
+      response = resource.save_debit(gid, debit)
+      expect(response).to be_success
 
+      debit = response.content
       expect(debit).to be_kind_of(InvisibleCollector::Model::Debit)
 
       expect(debit.number).to eq(parsed['number'])
@@ -51,8 +53,10 @@ describe InvisibleCollector::Resources::DebtResource do
       debt = InvisibleCollector::Model::Debt.new(id: gid)
       debit = InvisibleCollector::Model::Debit.new(attrs)
       stub_do_api("/debts/#{gid}/debits", :post).with(body: debit.to_json).to_return(body: fixture)
-      debit = resource.save_debit(debt, debit)
+      response = resource.save_debit(debt, debit)
+      expect(response).to be_success
 
+      debit = response.content
       expect(debit).to be_kind_of(InvisibleCollector::Model::Debit)
 
       expect(debit.number).to eq(parsed['number'])
@@ -67,8 +71,10 @@ describe InvisibleCollector::Resources::DebtResource do
       attrs = { number: 'sdfsad', date: Date.today, gross_total: 50.0 }
       gid = SecureRandom.uuid
       stub_do_api("/debts/#{gid}/debits", :post).with(body: attrs.to_json).to_return(body: fixture)
-      debit = resource.save_debit(gid, attrs.to_json)
+      response = resource.save_debit(gid, attrs.to_json)
+      expect(response).to be_success
 
+      debit = response.content
       expect(debit).to be_kind_of(InvisibleCollector::Model::Debit)
 
       expect(debit.number).to eq(parsed['number'])

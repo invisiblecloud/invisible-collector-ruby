@@ -29,8 +29,10 @@ describe InvisibleCollector::Resources::AlarmResource do
       fixture = api_fixture('alarm/close')
       parsed  = JSON.load(fixture)
       stub_do_api("/alarms/#{parsed['gid']}/close", :put).with(body: nil).to_return(body: fixture)
-      alarm = resource.close(parsed['gid'])
+      response = resource.close(parsed['gid'])
+      expect(response).to be_success
 
+      alarm = response.content
       expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])
@@ -44,8 +46,10 @@ describe InvisibleCollector::Resources::AlarmResource do
       parsed  = JSON.load(fixture)
       alarm = InvisibleCollector::Model::Alarm.new gid: parsed['gid']
       stub_do_api("/alarms/#{parsed['gid']}/close", :put).with(body: nil).to_return(body: fixture)
-      alarm = resource.close(alarm)
+      response = resource.close(alarm)
+      expect(response).to be_success
 
+      alarm = response.content
       expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
 
       expect(alarm.gid).to eq(parsed['gid'])

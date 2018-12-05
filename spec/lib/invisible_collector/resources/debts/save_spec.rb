@@ -33,8 +33,10 @@ describe InvisibleCollector::Resources::DebtResource do
       attrs = { number: 'sdfsad', external_id: 'sfsdfsad', type: 'SD', status: 'PENDING' }
       debt = InvisibleCollector::Model::Debt.new(attrs)
       stub_do_api('/debts', :post).with(body: debt.to_json).to_return(body: fixture)
-      debt = resource.save debt
+      response = resource.save debt
+      expect(response).to be_success
 
+      debt = response.content
       expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
@@ -54,8 +56,10 @@ describe InvisibleCollector::Resources::DebtResource do
 
       attrs = { number: 'sdfsad', external_id: 'sfsdfsad', type: 'SD', status: 'PENDING' }
       stub_do_api('/debts', :post).with(body: attrs.to_json).to_return(body: fixture)
-      debt = resource.save attrs
+      response = resource.save attrs
+      expect(response).to be_success
 
+      debt = response.content
       expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])

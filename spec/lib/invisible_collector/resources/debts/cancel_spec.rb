@@ -30,8 +30,10 @@ describe InvisibleCollector::Resources::DebtResource do
       parsed  = JSON.parse(fixture)
 
       stub_do_api('/debts/id/cancel', :put).to_return(body: fixture)
-      debt = resource.cancel 'id'
+      response = resource.cancel 'id'
+      expect(response).to be_success
 
+      debt = response.content
       expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])
@@ -52,8 +54,10 @@ describe InvisibleCollector::Resources::DebtResource do
       debt = InvisibleCollector::Model::Debt.new external_id: 'id'
 
       stub_do_api('/debts/id/cancel', :put).to_return(body: fixture)
-      debt = resource.cancel(debt)
+      response = resource.cancel(debt)
+      expect(response).to be_success
 
+      debt = response.content
       expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
 
       expect(debt.number).to eq(parsed['number'])

@@ -36,8 +36,10 @@ describe InvisibleCollector::Resources::AlarmResource do
 
         event = InvisibleCollector::Model::AlarmEvent.new(attrs)
         stub_do_api("/alarms/something/events", :post).with(body: event.to_json).to_return(body: fixture, status: 201)
-        event = resource.save_event "something", event
+        response = resource.save_event "something", event
+        expect(response).to be_success
 
+        event = response.content
         expect(event).to be_kind_of(InvisibleCollector::Model::AlarmEvent)
 
         expect(event.gid).to eq(parsed['gid'])
@@ -52,8 +54,10 @@ describe InvisibleCollector::Resources::AlarmResource do
         parsed  = JSON.load(fixture)
 
         stub_do_api('/alarms/something/events', :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
-        event = resource.save_event 'something', attrs
+        response = resource.save_event 'something', attrs
+        expect(response).to be_success
 
+        event = response.content
         expect(event).to be_kind_of(InvisibleCollector::Model::AlarmEvent)
 
         expect(event.gid).to eq(parsed['gid'])

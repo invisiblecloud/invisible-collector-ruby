@@ -16,12 +16,14 @@ module InvisibleCollector
         response = execute do |connection|
           connection.put("debts/#{id}/cancel")
         end
-        Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, debt)
       end
 
       def find(params = {})
         response = execute_get('debts/find', params)
-        JSON.parse(response.body).map { |json| Model::Debt.new(json.deep_transform_keys(&:underscore)) }
+        debts = JSON.parse(response.body).map { |json| Model::Debt.new(json.deep_transform_keys(&:underscore)) }
+        Response.new(response, debts)
       end
 
       def get(id, attrs = {})
@@ -29,25 +31,29 @@ module InvisibleCollector
         if response.status == 404
           nil
         else
-          Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+          Response.new(response, debt)
         end
       end
 
       def save(debt)
         response = execute_post('debts', debt)
-        Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, debt)
       end
 
       def save_debit(debt, debit)
         id = debt.is_a?(Model::Debt) ? debt.id : debt
         response = execute_post("debts/#{id}/debits", debit)
-        Model::Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        debit = Model::Debit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, debit)
       end
 
       def save_credit(debt, credit)
         id = debt.is_a?(Model::Debt) ? debt.id : debt
         response = execute_post("debts/#{id}/credits", credit)
-        Model::Credit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        credit = Model::Credit.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
+        Response.new(response, credit)
       end
     end
   end

@@ -13,8 +13,10 @@ describe InvisibleCollector::Resources::CompanyResource do
       parsed = JSON.load(fixture)
 
       stub_do_api('/companies').to_return(body: fixture)
-      company = resource.get
+      response = resource.get
+      expect(response).to be_success
 
+      company = response.content
       expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
@@ -38,8 +40,10 @@ describe InvisibleCollector::Resources::CompanyResource do
       company = InvisibleCollector::Model::Company.new
       as_json = {}
       stub_do_api('/companies', :put).with(body: as_json).to_return(body: fixture, status: 201)
-      company = resource.update company
+      response = resource.update company
+      expect(response).to be_success
 
+      company = response.content
       expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
@@ -61,8 +65,10 @@ describe InvisibleCollector::Resources::CompanyResource do
       parsed = JSON.load(fixture)
 
       stub_do_api('/companies/enableNotifications', :put).to_return(body: fixture)
-      company = resource.enable_notifications
+      response = resource.enable_notifications
+      expect(response).to be_success
 
+      company = response.content
       expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])
@@ -84,8 +90,10 @@ describe InvisibleCollector::Resources::CompanyResource do
       parsed = JSON.load(fixture)
 
       stub_do_api('/companies/disableNotifications', :put).to_return(body: fixture)
-      company = resource.disable_notifications
+      response = resource.disable_notifications
+      expect(response).to be_success
 
+      company = response.content
       expect(company).to be_kind_of(InvisibleCollector::Model::Company)
 
       expect(company.name).to eq(parsed['name'])

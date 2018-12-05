@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe InvisibleCollector::API do
 
@@ -31,7 +31,7 @@ describe InvisibleCollector::API do
 
   end
 
-  it "has a version number" do
+  it 'has a version number' do
     expect(InvisibleCollector::VERSION).not_to be nil
   end
 end
