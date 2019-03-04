@@ -7,6 +7,7 @@ module InvisibleCollector
       attr_accessor :external_id
       attr_accessor :email
       attr_accessor :phone
+      attr_accessor :mobile
       attr_accessor :address
       attr_accessor :zip_code
       attr_accessor :city
@@ -20,6 +21,7 @@ module InvisibleCollector
         @external_id = options[:external_id]
         @email = options[:email]
         @phone = options[:phone]
+        @mobile = options[:mobile]
         @address = options[:address]
         @zip_code = options[:zip_code]
         @city = options[:city]

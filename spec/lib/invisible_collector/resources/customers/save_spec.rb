@@ -35,6 +35,7 @@ describe InvisibleCollector::Resources::CustomerResource do
       expect(customer.country).to eq(parsed['country'])
       expect(customer.phone).to eq(parsed['phone'])
       expect(customer.email).to eq(parsed['email'])
+      expect(customer.mobile).to eq(parsed['mobile'])
       expect(customer.gid).to eq(parsed['gid'])
       expect(customer.external_id).to eq(parsed['externalId'])
     end
@@ -58,6 +59,7 @@ describe InvisibleCollector::Resources::CustomerResource do
       expect(customer.city).to eq(parsed['city'])
       expect(customer.country).to eq(parsed['country'])
       expect(customer.phone).to eq(parsed['phone'])
+      expect(customer.mobile).to eq(parsed['mobile'])
       expect(customer.email).to eq(parsed['email'])
       expect(customer.gid).to eq(parsed['gid'])
       expect(customer.external_id).to eq(parsed['externalId'])
