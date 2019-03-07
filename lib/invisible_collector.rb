@@ -5,6 +5,7 @@ require 'active_support/all'
 # Invisible Collector load module
 module InvisibleCollector
   autoload :API, 'invisible_collector/api'
+  autoload :Voice, 'invisible_collector/voice'
   autoload :Response, 'invisible_collector/response'
 
   autoload :NotFound, 'invisible_collector/not_found'
@@ -23,6 +24,8 @@ module InvisibleCollector
     autoload :Debit, 'invisible_collector/models/debit'
     autoload :Credit, 'invisible_collector/models/credit'
     autoload :Payment, 'invisible_collector/models/payment'
+
+    autoload :Sms, 'invisible_collector/models/sms'
   end
 
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
@@ -33,5 +36,7 @@ module InvisibleCollector
     autoload :GroupResource, 'invisible_collector/resources/group_resource'
     autoload :DebtResource, 'invisible_collector/resources/debt_resource'
     autoload :PaymentResource, 'invisible_collector/resources/payment_resource'
+
+    autoload :SmsResource, 'invisible_collector/resources/sms_resource'
   end
 end
