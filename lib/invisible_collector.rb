@@ -25,7 +25,9 @@ module InvisibleCollector
     autoload :Credit, 'invisible_collector/models/credit'
     autoload :Payment, 'invisible_collector/models/payment'
 
+    autoload :Email, 'invisible_collector/models/email'
     autoload :Sms, 'invisible_collector/models/sms'
+    autoload :Vms, 'invisible_collector/models/vms'
   end
 
   autoload :DefaultHandlers, 'invisible_collector/resources/default_handlers'
@@ -37,6 +39,8 @@ module InvisibleCollector
     autoload :DebtResource, 'invisible_collector/resources/debt_resource'
     autoload :PaymentResource, 'invisible_collector/resources/payment_resource'
 
+    autoload :EmailResource, 'invisible_collector/resources/email_resource'
     autoload :SmsResource, 'invisible_collector/resources/sms_resource'
+    autoload :VmsResource, 'invisible_collector/resources/vms_resource'
   end
 end

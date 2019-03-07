@@ -17,8 +17,18 @@ module InvisibleCollector
       end
     end
 
+    def email(options = {})
+      resources[:alarm] ||= Resources::EmailResource.new({ connection: connection }.merge(options))
+      resources[:alarm]
+    end
+
     def sms(options = {})
       resources[:alarm] ||= Resources::SmsResource.new({ connection: connection }.merge(options))
+      resources[:alarm]
+    end
+
+    def vms(options = {})
+      resources[:alarm] ||= Resources::VmsResource.new({ connection: connection }.merge(options))
       resources[:alarm]
     end
 

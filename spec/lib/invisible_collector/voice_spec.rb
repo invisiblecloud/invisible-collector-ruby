@@ -15,7 +15,9 @@ describe InvisibleCollector::Voice do
   describe '#resources' do
 
     {
-      sms: InvisibleCollector::Resources::SmsResource
+      email: InvisibleCollector::Resources::EmailResource,
+      sms: InvisibleCollector::Resources::SmsResource,
+      vms: InvisibleCollector::Resources::VmsResource
     }.each do |key, value|
 
       it "supports #{key} requests" do
