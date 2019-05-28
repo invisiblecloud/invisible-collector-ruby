@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module InvisibleCollector
   module DefaultHandlers
     def initialize(options = {})

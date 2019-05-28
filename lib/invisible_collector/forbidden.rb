@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module InvisibleCollector
   class Forbidden < RuntimeError
     def self.from_json(json)

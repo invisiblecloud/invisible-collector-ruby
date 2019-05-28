@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module InvisibleCollector
   class InvalidRequest < RuntimeError
     def self.from_json(json)

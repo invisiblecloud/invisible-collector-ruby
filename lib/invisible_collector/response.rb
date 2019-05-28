@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module InvisibleCollector
   class Response
     attr_reader :content

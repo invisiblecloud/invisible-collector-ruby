@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'invisible_collector/version'
 require 'json'
 require 'active_support/all'
