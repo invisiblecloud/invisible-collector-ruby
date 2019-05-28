@@ -11,6 +11,8 @@ describe InvisibleCollector::Resources::VmsResource do
     { invalid: { code: 400, exception: InvisibleCollector::InvalidRequest, message: 'Invalid JSON' },
       unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized,
                       message: 'Credentials are required to access this resource' },
+      forbidden: { code: 403, exception: InvisibleCollector::Forbidden,
+                      message: 'Not enough VMS credits. Only has 0 credits to send 1 VMS'},
       not_found: { code: 404, exception: InvisibleCollector::NotFound, message: 'Vms not found' },
       unprocessable: { code: 422, exception: InvisibleCollector::InvalidRequest,
                        message: 'Unprocessable request' } }.each do |key, attrs|

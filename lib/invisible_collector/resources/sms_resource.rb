@@ -6,6 +6,7 @@ module InvisibleCollector
       def initialize(options = {})
         super(options)
         handle(400) { |response| raise InvisibleCollector::InvalidRequest.from_json(response.body) }
+        handle(403) { |response| raise InvisibleCollector::Forbidden.from_json(response.body) }
         handle(404) { |response| raise InvisibleCollector::NotFound.from_json(response.body) }
         handle(409) { |response| raise InvisibleCollector::InvalidRequest.from_json(response.body) }
         handle(422) { |response| raise InvisibleCollector::InvalidRequest.from_json(response.body) }

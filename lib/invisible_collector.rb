@@ -11,6 +11,7 @@ module InvisibleCollector
   autoload :NotFound, 'invisible_collector/not_found'
   autoload :InvalidRequest, 'invisible_collector/invalid_request'
   autoload :Unauthorized, 'invisible_collector/unauthorized'
+  autoload :Forbidden, 'invisible_collector/forbidden'
 
   module Model
     autoload :AbstractModel, 'invisible_collector/models/abstract_model'
