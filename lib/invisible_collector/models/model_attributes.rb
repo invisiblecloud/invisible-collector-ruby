@@ -9,7 +9,7 @@ module InvisibleCollector
         end
       end
 
-      def to_json
+      def to_json(*_args)
         to_h.to_json
       end
     end
