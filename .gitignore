@@ -8,3 +8,6 @@
 /spec/reports/
 /tmp/
 .idea
+
+.ruby-version
+.ruby-gemset
