@@ -55,11 +55,37 @@ module InvisibleCollector
         Response.new(response, credit)
       end
 
+      def suspend(debt = {})
+        id = get_id(debt)
+        response = execute do |connection|
+          connection.put("debts/#{id}/suspend")
+        end
+        build_response(response)
+      end
+
+      def unsuspend(debt = {})
+        id = get_id(debt)
+        response = execute do |connection|
+          connection.put("debts/#{id}/unsuspend")
+        end
+        build_response(response)
+      end
+
       private
 
       def build_response(response)
         debt = Model::Debt.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         Response.new(response, debt)
+      end
+
+      def get_id(debt)
+        if debt.is_a?(InvisibleCollector::Model::Debt)
+          debt.id
+        elsif debt.is_a?(Hash)
+          debt[:id]
+        else
+          debt
+        end
       end
     end
   end

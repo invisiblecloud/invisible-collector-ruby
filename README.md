@@ -74,6 +74,8 @@ Actions supported:
 * `client.debt.find(:attribute_hash)`
 * `client.debt.get(:id)`
 * `client.debt.save(:attribute_hash)`
+* `client.debt.suspend(:debt)`
+* `client.debt.unsuspend(:debt)`
 
 ### Alarm resource
 
