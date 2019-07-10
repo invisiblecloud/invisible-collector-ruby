@@ -14,7 +14,7 @@ module InvisibleCollector
       end
 
       def cancel(debt = {})
-        id = debt.is_a?(InvisibleCollector::Model::Debt) ? debt.external_id : debt
+        id = get_id(debt)
         response = execute do |connection|
           connection.put("debts/#{id}/cancel")
         end

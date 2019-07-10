@@ -25,7 +25,7 @@ describe InvisibleCollector::Resources::DebtResource do
       end
     end
 
-    it 'cancels a debt when given an external id' do
+    it 'cancels a debt when given an id' do
       fixture = api_fixture('debt/cancel')
       parsed  = JSON.parse(fixture)
 
@@ -51,10 +51,32 @@ describe InvisibleCollector::Resources::DebtResource do
       fixture = api_fixture('debt/cancel')
       parsed  = JSON.parse(fixture)
 
-      debt = InvisibleCollector::Model::Debt.new external_id: 'id'
+      debt = InvisibleCollector::Model::Debt.new id: 'id'
 
       stub_do_api('/debts/id/cancel', :put).to_return(body: fixture)
       response = resource.cancel(debt)
+      expect(response).to be_success
+
+      debt = response.content
+      expect(debt).to be_kind_of(InvisibleCollector::Model::Debt)
+
+      expect(debt.number).to eq(parsed['number'])
+      expect(debt.external_id).to eq(parsed['externalId'])
+      expect(debt.type).to eq(parsed['type'])
+      expect(debt.status).to eq('CANCELLED')
+      expect(debt.date).to eq(parsed['date'])
+      expect(debt.due_date).to eq(parsed['dueDate'])
+      expect(debt.net_total).to eq(parsed['netTotal'])
+      expect(debt.tax).to eq(parsed['tax'])
+      expect(debt.gross_total).to eq(parsed['grossTotal'])
+    end
+
+    it 'cancels a debt when given a hash' do
+      fixture = api_fixture('debt/cancel')
+      parsed  = JSON.parse(fixture)
+
+      stub_do_api('/debts/id/cancel', :put).to_return(body: fixture)
+      response = resource.cancel(id: 'id')
       expect(response).to be_success
 
       debt = response.content
