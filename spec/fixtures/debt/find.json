@@ -8,6 +8,7 @@
   "netTotal": 120.0,
   "tax": 30.0,
   "grossTotal": 150.0,
+  "paidTotal": 0.0,
   "items": [{
     "name": "small item",
     "description": "a rather small item",

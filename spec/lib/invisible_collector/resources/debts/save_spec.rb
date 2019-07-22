@@ -48,6 +48,7 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.net_total).to eq(parsed['netTotal'])
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
+      expect(debt.paid_total).to eq(parsed['paidTotal'])
     end
 
     it 'uses a debt hash' do
@@ -71,6 +72,7 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.net_total).to eq(parsed['netTotal'])
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
+      expect(debt.paid_total).to eq(parsed['paidTotal'])
     end
   end
 end

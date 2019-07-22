@@ -15,6 +15,7 @@ module InvisibleCollector
       attr_accessor :net_total
       attr_accessor :tax
       attr_accessor :gross_total
+      attr_accessor :paid_total
       attr_accessor :currency
       attr_accessor :attributes
       attr_accessor :debits
@@ -34,6 +35,7 @@ module InvisibleCollector
         @net_total = options[:net_total]
         @tax = options[:tax]
         @gross_total = options[:gross_total]
+        @paid_total = options[:paid_total]
         @currency = options[:currency]
         @debits = options[:debits]
       end
