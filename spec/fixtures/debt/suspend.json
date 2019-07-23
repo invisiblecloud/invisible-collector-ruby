@@ -5,10 +5,12 @@
   "status": "SUSPENDED",
   "date": "2016-10-08",
   "dueDate": "2016-11-08",
+  "paidAt": "2016-10-08",
   "netTotal": 120.0,
   "tax": 30.0,
   "grossTotal": 150.0,
   "paidTotal": 0.0,
+  "debitTotal": 0.0,
   "items": [
     {
       "name": "small item",

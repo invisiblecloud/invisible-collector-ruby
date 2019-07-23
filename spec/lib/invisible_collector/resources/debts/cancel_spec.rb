@@ -42,9 +42,11 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.status).to eq('CANCELLED')
       expect(debt.date).to eq(parsed['date'])
       expect(debt.due_date).to eq(parsed['dueDate'])
+      expect(debt.paid_at).to eq(parsed['paidAt'])
       expect(debt.net_total).to eq(parsed['netTotal'])
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
+      expect(debt.debit_total).to eq(parsed['debitTotal'])
     end
 
     it 'cancels a debt when given a debt object' do
@@ -66,10 +68,12 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.status).to eq('CANCELLED')
       expect(debt.date).to eq(parsed['date'])
       expect(debt.due_date).to eq(parsed['dueDate'])
+      expect(debt.paid_at).to eq(parsed['paidAt'])
       expect(debt.net_total).to eq(parsed['netTotal'])
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
       expect(debt.paid_total).to eq(parsed['paidTotal'])
+      expect(debt.debit_total).to eq(parsed['debitTotal'])
     end
 
     it 'cancels a debt when given a hash' do
@@ -89,10 +93,12 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.status).to eq('CANCELLED')
       expect(debt.date).to eq(parsed['date'])
       expect(debt.due_date).to eq(parsed['dueDate'])
+      expect(debt.paid_at).to eq(parsed['paidAt'])
       expect(debt.net_total).to eq(parsed['netTotal'])
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
       expect(debt.paid_total).to eq(parsed['paidTotal'])
+      expect(debt.debit_total).to eq(parsed['debitTotal'])
     end
   end
 end

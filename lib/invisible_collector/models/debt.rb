@@ -10,12 +10,14 @@ module InvisibleCollector
       attr_accessor :status
       attr_accessor :date
       attr_accessor :due_date
+      attr_accessor :paid_at
       attr_accessor :customer
       attr_accessor :items
       attr_accessor :net_total
       attr_accessor :tax
       attr_accessor :gross_total
       attr_accessor :paid_total
+      attr_accessor :debit_total
       attr_accessor :currency
       attr_accessor :attributes
       attr_accessor :debits
@@ -29,6 +31,7 @@ module InvisibleCollector
         @status = options[:status]
         @date = options[:date]
         @due_date = options[:due_date]
+        @paid_at = options[:paid_at]
         @customer = options[:customer]
         @items = options[:items]
         @attributes = options[:attributes]
@@ -36,6 +39,7 @@ module InvisibleCollector
         @tax = options[:tax]
         @gross_total = options[:gross_total]
         @paid_total = options[:paid_total]
+        @debit_total = options[:debit_total]
         @currency = options[:currency]
         @debits = options[:debits]
       end

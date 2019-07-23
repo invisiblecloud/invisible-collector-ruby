@@ -10,9 +10,11 @@ describe InvisibleCollector::Model::Debt do
       status: 'PENDING',
       date: '2018-01-01',
       due_date: '2018-02-01',
+      paid_at: '2019-02-01',
       customer: 'some customer',
       net_total: 34.5,
       paid_total: 0.0,
+      debit_total: 0.0,
       tax: 10.0,
       gross_total: 44.5,
       currency: 'EUR'
@@ -24,9 +26,11 @@ describe InvisibleCollector::Model::Debt do
     expect(json).to include('"status":"PENDING"')
     expect(json).to include('"date":"2018-01-01"')
     expect(json).to include('"dueDate":"2018-02-01"')
+    expect(json).to include('"paidAt":"2019-02-01"')
     expect(json).to include('"netTotal":34.5')
     expect(json).to include('"grossTotal":44.5')
     expect(json).to include('"paidTotal":0.0')
+    expect(json).to include('"debitTotal":0.0')
   end
 
   describe 'creation' do
