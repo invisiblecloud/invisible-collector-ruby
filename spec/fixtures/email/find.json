@@ -1,0 +1,15 @@
+{
+  "records": [{
+    "gid": "c47b6808-e7bd-43ac-85a2-d560a605fcb8",
+    "destination": "a",
+    "status": "accepted",
+    "events": [
+      {
+        "event": "accepted",
+        "description": "Accepted for delivery",
+        "createdAt": 1551966142000
+      }
+    ]
+  }],
+  "totalRecords": 1
+}

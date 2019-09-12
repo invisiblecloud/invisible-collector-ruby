@@ -29,6 +29,7 @@ module InvisibleCollector
     autoload :Payment, 'invisible_collector/models/payment'
 
     autoload :Email, 'invisible_collector/models/email'
+    autoload :EmailList, 'invisible_collector/models/email_list'
     autoload :Sms, 'invisible_collector/models/sms'
     autoload :Vms, 'invisible_collector/models/vms'
   end

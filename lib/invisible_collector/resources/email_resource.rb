@@ -13,6 +13,11 @@ module InvisibleCollector
         handle(422) { |response| raise InvisibleCollector::InvalidRequest.from_json(response.body) }
       end
 
+      def find(params = {})
+        response = execute_get('email/find', params)
+        Response.new(response, Model::EmailList.new(JSON.parse(response.body).deep_transform_keys(&:underscore)))
+      end
+
       def get(id, attrs = {})
         response = @connection.get("email/#{id}", attrs)
         if response.status == 404

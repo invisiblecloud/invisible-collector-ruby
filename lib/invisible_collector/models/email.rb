@@ -7,6 +7,7 @@ module InvisibleCollector
       attr_accessor :destination
       attr_accessor :status
       attr_accessor :events
+      attr_accessor :smtp_id
 
       def initialize(options = {})
         options = options.with_indifferent_access

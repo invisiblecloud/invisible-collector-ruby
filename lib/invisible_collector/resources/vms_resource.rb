@@ -23,8 +23,8 @@ module InvisibleCollector
         end
       end
 
-      def save(sms)
-        response = execute_post('vms', sms)
+      def save(message)
+        response = execute_post('vms', message)
         build_list_response(response)
       end
 
