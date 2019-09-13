@@ -22,13 +22,13 @@ module InvisibleCollector
 
       def save_event(alarm, event)
         gid = alarm.is_a?(Model::Alarm) ? alarm.gid : alarm
-        response = execute_post("alarms/#{gid}/events", event)
+        response = execute_post("v1/alarms/#{gid}/events", event)
         alarm = Model::AlarmEvent.new(JSON.parse(response.body).deep_transform_keys(&:underscore))
         Response.new(response, alarm)
       end
 
       def get(gid)
-        response = @connection.get("alarms/#{gid}")
+        response = @connection.get("v1/alarms/#{gid}")
         if response.status == 404
           Response.new(response, nil)
         elsif handles.key? response.status

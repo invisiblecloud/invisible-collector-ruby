@@ -17,7 +17,7 @@ describe InvisibleCollector::Resources::AlarmResource do
 
       it "fails on #{key} error" do
         fixture = api_fixture("alarm/#{key}")
-        stub_do_api("/alarms/something/events", :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
+        stub_do_api("/v1/alarms/something/events", :post).with(body: '{}').to_return(body: fixture, status: attrs[:code])
         params = {}
         expect {
           resource.save_event 'something', params
@@ -35,7 +35,7 @@ describe InvisibleCollector::Resources::AlarmResource do
         parsed  = JSON.load(fixture)
 
         event = InvisibleCollector::Model::AlarmEvent.new(attrs)
-        stub_do_api("/alarms/something/events", :post).with(body: event.to_json).to_return(body: fixture, status: 201)
+        stub_do_api("/v1/alarms/something/events", :post).with(body: event.to_json).to_return(body: fixture, status: 201)
         response = resource.save_event "something", event
         expect(response).to be_success
 
@@ -53,7 +53,7 @@ describe InvisibleCollector::Resources::AlarmResource do
         fixture = api_fixture('alarm/save_event')
         parsed  = JSON.load(fixture)
 
-        stub_do_api('/alarms/something/events', :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
+        stub_do_api('/v1/alarms/something/events', :post).with(body: attrs.to_json).to_return(body: fixture, status: 201)
         response = resource.save_event 'something', attrs
         expect(response).to be_success
 

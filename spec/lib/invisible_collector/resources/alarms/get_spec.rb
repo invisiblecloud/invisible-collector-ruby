@@ -17,7 +17,7 @@ describe InvisibleCollector::Resources::AlarmResource do
 
       it "fails on #{key} error" do
         fixture = api_fixture("alarm/#{key}")
-        stub_do_api("/alarms/something").to_return(body: fixture, status: attrs[:code])
+        stub_do_api("/v1/alarms/something").to_return(body: fixture, status: attrs[:code])
         params = {}
         expect {
           resource.get('something')
@@ -27,7 +27,7 @@ describe InvisibleCollector::Resources::AlarmResource do
 
     it 'returns null if not found' do
       fixture = api_fixture('alarm/not_found')
-      stub_do_api("/alarms/something").to_return(body: fixture, status: 404)
+      stub_do_api("/v1/alarms/something").to_return(body: fixture, status: 404)
       response = resource.get('something')
       expect(response).to be_error
       expect(response.presence).to be_nil
@@ -40,7 +40,7 @@ describe InvisibleCollector::Resources::AlarmResource do
       fixture = api_fixture('alarm/get')
       parsed  = JSON.load(fixture)
 
-      stub_do_api("/alarms/#{parsed['gid']}").to_return(body: fixture)
+      stub_do_api("/v1/alarms/#{parsed['gid']}").to_return(body: fixture)
       response = resource.get(parsed['gid'])
       expect(response).to be_success
 
