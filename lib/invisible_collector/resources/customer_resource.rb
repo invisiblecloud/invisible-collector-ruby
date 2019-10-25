@@ -25,6 +25,28 @@ module InvisibleCollector
         end
       end
 
+      #
+      # Returns a list of all debts registered for the specified customer.
+      # The customer attribute can be either a InvisibleCollector::Model::Customer instance or a customer id.
+      #
+      #  gid = 'customer id'
+      #  c = InvisibleCollector::Model::Customer.new(gid: gid)
+      #  client.customer.debts(c) #=> [InvisibleCollector::Model::Debt]
+      #  client.customer.debts(gid) #=> [InvisibleCollector::Model::Debt]
+      #
+      def debts(customer, params = {})
+        id = customer.is_a?(Model::Customer) ? customer.gid : customer
+        response = @connection.get("customers/#{id}/debts", params)
+        raise InvisibleCollector::NotFound.from_json(response.body) if response.status == 404
+
+        if handles.key?(response.status)
+          handles[response.status].call response
+        else
+          debts = JSON.parse(response.body).map { |j| Model::Debt.new(j.deep_transform_keys(&:underscore)) }
+          Response.new(response, debts)
+        end
+      end
+
       def find(params = {})
         response = @connection.get('customers/find', params)
         if handles.key? response.status
