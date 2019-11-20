@@ -47,6 +47,7 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.tax).to eq(parsed['tax'])
       expect(debt.gross_total).to eq(parsed['grossTotal'])
       expect(debt.debit_total).to eq(parsed['debitTotal'])
+      expect(debt.credit_total).to eq(parsed['creditTotal'])
     end
 
     it 'cancels a debt when given a debt object' do
@@ -74,6 +75,7 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.gross_total).to eq(parsed['grossTotal'])
       expect(debt.paid_total).to eq(parsed['paidTotal'])
       expect(debt.debit_total).to eq(parsed['debitTotal'])
+      expect(debt.credit_total).to eq(parsed['creditTotal'])
     end
 
     it 'cancels a debt when given a hash' do
@@ -99,6 +101,7 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.gross_total).to eq(parsed['grossTotal'])
       expect(debt.paid_total).to eq(parsed['paidTotal'])
       expect(debt.debit_total).to eq(parsed['debitTotal'])
+      expect(debt.credit_total).to eq(parsed['creditTotal'])
     end
   end
 end

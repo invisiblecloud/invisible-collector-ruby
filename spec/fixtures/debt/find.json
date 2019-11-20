@@ -11,6 +11,7 @@
   "grossTotal": 150.0,
   "paidTotal": 0.0,
   "debitTotal": 0.0,
+  "creditTotal": 0.0,
   "items": [{
     "name": "small item",
     "description": "a rather small item",

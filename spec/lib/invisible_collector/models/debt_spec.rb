@@ -15,6 +15,7 @@ describe InvisibleCollector::Model::Debt do
       net_total: 34.5,
       paid_total: 0.0,
       debit_total: 0.0,
+      credit_total: 0.0,
       tax: 10.0,
       gross_total: 44.5,
       currency: 'EUR'
@@ -31,6 +32,7 @@ describe InvisibleCollector::Model::Debt do
     expect(json).to include('"grossTotal":44.5')
     expect(json).to include('"paidTotal":0.0')
     expect(json).to include('"debitTotal":0.0')
+    expect(json).to include('"creditTotal":0.0')
   end
 
   describe 'creation' do

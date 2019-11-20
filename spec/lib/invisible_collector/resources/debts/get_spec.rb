@@ -54,6 +54,7 @@ describe InvisibleCollector::Resources::DebtResource do
       expect(debt.gross_total).to eq(parsed['grossTotal'])
       expect(debt.paid_total).to eq(parsed['paidTotal'])
       expect(debt.debit_total).to eq(parsed['debitTotal'])
+      expect(debt.credit_total).to eq(parsed['creditTotal'])
       expect(debt.debits.size).to eq(parsed['debits'].size)
       debt.debits.zip(parsed['debits']).each do |actual, expected|
         expect(actual[:number]).to eq(expected['number'])
