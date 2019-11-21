@@ -1,4 +1,8 @@
 {
-  "gid": "061d2feb-81c2-4694-a74a-13cecbe7d2ce",
-  "status": "OPEN"
+  "gid": "b811671e-9cc9-4071-bc1f-ad680c192ae4",
+  "status": "OPEN",
+  "createdAt": "2019-11-12T11:00:08.000+0000",
+  "updatedAt": "2019-11-19T10:00:10.000+0000",
+  "events": [],
+  "settlement": null
 }

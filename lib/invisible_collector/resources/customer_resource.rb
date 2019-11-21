@@ -14,7 +14,7 @@ module InvisibleCollector
 
       def alarm(customer, params = {})
         id = customer.is_a?(Model::Customer) ? customer.gid : customer
-        response = @connection.get("customers/#{id}/alarm", params)
+        response = @connection.get("v1/customers/#{id}/alarm", params)
         if response.status == 404
           Response.new(response, nil)
         elsif handles.key? response.status

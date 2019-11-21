@@ -17,7 +17,7 @@ describe InvisibleCollector::Resources::CustomerResource do
 
       it "fails on #{key} error" do
         fixture = api_fixture("customer/#{key}")
-        stub_do_api("/customers/something/alarm").to_return(body: fixture, status: attrs[:code])
+        stub_do_api("/v1/customers/something/alarm").to_return(body: fixture, status: attrs[:code])
         params = {}
         expect {
           resource.alarm('something')
@@ -27,7 +27,7 @@ describe InvisibleCollector::Resources::CustomerResource do
 
     it 'returns null if not found' do
       fixture = api_fixture('customer/alarm')
-      stub_do_api('/customers/something/alarm').to_return(body: fixture, status: 404)
+      stub_do_api('/v1/customers/something/alarm').to_return(body: fixture, status: 404)
       response = resource.alarm('something')
       expect(response).to be_error
 
@@ -39,7 +39,22 @@ describe InvisibleCollector::Resources::CustomerResource do
       fixture = api_fixture('customer/alarm')
       parsed  = JSON.load(fixture)
 
-      stub_do_api('/customers/something/alarm').to_return(body: fixture)
+      stub_do_api('/v1/customers/something/alarm').to_return(body: fixture)
+      response = resource.alarm('something')
+      expect(response).to be_success
+
+      alarm = response.content
+      expect(alarm).to be_kind_of(InvisibleCollector::Model::Alarm)
+
+      expect(alarm.gid).to eq(parsed['gid'])
+      expect(alarm.status).to eq(parsed['status'])
+    end
+
+    it 'includes created and updated dates' do
+      fixture = api_fixture('customer/alarm')
+      parsed  = JSON.load(fixture)
+
+      stub_do_api('/v1/customers/something/alarm').to_return(body: fixture)
       response = resource.alarm('something')
       expect(response).to be_success
 
@@ -50,6 +65,8 @@ describe InvisibleCollector::Resources::CustomerResource do
       expect(alarm.status).to eq(parsed['status'])
       expect(alarm.created_at).to eq(parsed['createdAt'])
       expect(alarm.updated_at).to eq(parsed['updatedAt'])
+      expect(alarm.created_at).to be_a(Time)
+      expect(alarm.updated_at).to be_a(Time)
     end
   end
 end

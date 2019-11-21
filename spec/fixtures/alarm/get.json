@@ -1,4 +1,32 @@
 {
-  "gid": "061d2feb-81c2-4694-a74a-13cecbe7d2ce",
-  "status": "OPEN"
+  "gid": "b811671e-9cc9-4071-bc1f-ad680c192ae4",
+  "status": "OPEN",
+  "createdAt": "2019-11-12T11:00:08.000+0000",
+  "updatedAt": "2019-11-19T10:00:10.000+0000",
+  "events": [{
+    "origin": "no-reply@mail.com",
+    "destination": "mail@debtor.com",
+    "gid": "7fdc7e60-29d4-4944-97d1-c253a89d8720",
+    "debts": null,
+    "message": "-",
+    "messageType": "EMAIL",
+    "debtor": false
+  }, {
+    "origin": "no-reply@mail.com",
+    "destination": "mail@debtor.com",
+    "gid": "ebd0b3e8-5bf8-47f0-83a0-6d3df837446d",
+    "debts": null,
+    "message": "-",
+    "messageType": "EMAIL",
+    "debtor": false
+  }, {
+    "origin": "iCollector",
+    "destination": "-",
+    "gid": "",
+    "debts": null,
+    "message": "test message",
+    "messageType": "SMS",
+    "debtor": false
+  }],
+  "settlement": null
 }
