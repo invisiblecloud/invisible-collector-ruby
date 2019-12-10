@@ -8,6 +8,20 @@ describe InvisibleCollector::Resources::CompanyResource do
 
   describe '#get' do
 
+    {
+      unauthorized: { code: 401, exception: InvisibleCollector::Unauthorized, message: 'Credentials are required to access this resource' }
+    }.each do |key, attrs|
+
+      it "fails on #{key} error" do
+        fixture = api_fixture("company/#{key}")
+        stub_do_api('/companies').to_return(body: fixture, status: attrs[:code])
+        params = {}
+        expect {
+          resource.get
+        }.to raise_exception(attrs[:exception]).with_message("#{attrs[:code]}: #{attrs[:message]}")
+      end
+    end
+
     it 'returns the company info' do
       fixture = api_fixture('company/get')
       parsed = JSON.load(fixture)

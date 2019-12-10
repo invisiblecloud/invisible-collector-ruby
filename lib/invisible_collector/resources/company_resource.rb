@@ -10,7 +10,12 @@ module InvisibleCollector
       end
 
       def get
-        build_response(@connection.get('companies'))
+        response = @connection.get('companies')
+        if handles.key? response.status
+          handles[response.status].call response
+        else
+          build_response(response)
+        end
       end
 
       def update(company)
