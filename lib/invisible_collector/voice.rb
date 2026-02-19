@@ -4,7 +4,7 @@ require 'faraday'
 
 module InvisibleCollector
   class Voice
-    VOICE_API = 'https://voice.invisiblecollector.com'
+    VOICE_API = 'https://link.invisiblecollector.com'
 
     attr_reader :api_token
 
