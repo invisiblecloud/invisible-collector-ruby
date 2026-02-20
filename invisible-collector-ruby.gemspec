@@ -7,8 +7,8 @@ require 'invisible_collector/version'
 Gem::Specification.new do |spec|
   spec.name          = 'invisible_collector'
   spec.version       = InvisibleCollector::VERSION
-  spec.authors       = ['João Madureira']
-  spec.email         = ['jmadureira@invisiblecollector.com']
+  spec.authors       = ['InvisibleCollector']
+  spec.email         = ['support@invisiblecollector.com']
 
   spec.summary       = 'Official Invisible Collector Gem'
   spec.description   = 'Official Invisible Collector Gem used to interact with Invisible Collector API in ruby'
